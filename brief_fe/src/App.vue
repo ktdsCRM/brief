@@ -1,12 +1,29 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">메인</router-link> |
-      <router-link to="/about">요약</router-link>
+    <div>
+      <Header />
     </div>
-    <router-view/>
+    <div>
+      <Footer />
+    </div>
   </div>
 </template>
+
+<script>
+import Header from "@/layout/Header.vue";
+import Footer from "./layout/Footer.vue";
+// export default defineComponent({
+//   setup() {},
+// });
+
+export default {
+  name: "App",
+  components: {
+    Header,
+    Footer,
+  },
+};
+</script>
 
 <style>
 #app {
@@ -15,6 +32,8 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  min-height: 100%;
+  position: relative;
 }
 
 #nav {
