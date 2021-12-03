@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TextSummary/>
+    <TextSummary />
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 import TextSummary from "../components/middle/TextSummary.vue";
 export default {
   name: "Middle",
-  components: {TextSummary},
+  components: { TextSummary },
 };
 </script>
 
