@@ -4,6 +4,9 @@
       <Header />
     </div>
     <div>
+      <Middle/>
+    </div>
+    <div>
       <Footer />
     </div>
   </div>
@@ -12,6 +15,7 @@
 <script>
 import Header from "@/layout/Header.vue";
 import Footer from "./layout/Footer.vue";
+import Middle from "./layout/Middle.vue";
 // export default defineComponent({
 //   setup() {},
 // });
@@ -21,6 +25,7 @@ export default {
   components: {
     Header,
     Footer,
+    Middle,
   },
 };
 </script>
