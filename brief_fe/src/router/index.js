@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import TextSummary from '@/components/middle/TextSummary.vue'
 import Test from '@/components/middle/test.vue'
+import OCRSummary from '@/components/middle/OCRSummary.vue'
 
 Vue.use(VueRouter)
 
@@ -29,6 +30,11 @@ const routes = [
     path: '/test',
     name: 'Test',
     component: Test,
+  },
+  {
+    path: '/ocrSummary',
+    name: 'OCRSummary',
+    component: OCRSummary,
   }
 ]
 

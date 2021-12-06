@@ -12,7 +12,7 @@
             ><router-link to="/textSummary">텍스트</router-link></b-nav-item
           >
           <b-nav-item id="menu"
-            ><router-link to="/test">사진</router-link></b-nav-item
+            ><router-link to="/ocrSummary">사진</router-link></b-nav-item
           >
           <b-nav-item id="menu">음성</b-nav-item>
         </b-navbar-nav>
