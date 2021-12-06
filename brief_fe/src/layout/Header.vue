@@ -14,7 +14,9 @@
           <b-nav-item id="menu"
             ><router-link to="/ocrSummary">사진</router-link></b-nav-item
           >
-          <b-nav-item id="menu">음성</b-nav-item>
+          <b-nav-item id="menu"
+            ><router-link to="/sttSummary">음성</router-link></b-nav-item
+          >
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
