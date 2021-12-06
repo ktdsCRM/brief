@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="midText">
     <TextSummary />
   </div>
 </template>
@@ -13,4 +13,9 @@ export default {
 </script>
 
 <style>
+.midText {
+  text-align: center;
+  align-items: center;
+  margin: 0 auto;
+}
 </style>
