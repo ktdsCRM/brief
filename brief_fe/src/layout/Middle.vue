@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <TextSummary/>
+  <div class="midText">
+    <TextSummary />
   </div>
 </template>
 
@@ -8,9 +8,14 @@
 import TextSummary from "../components/middle/TextSummary.vue";
 export default {
   name: "Middle",
-  components: {TextSummary},
+  components: { TextSummary },
 };
 </script>
 
 <style>
+.midText {
+  text-align: center;
+  align-items: center;
+  margin: 0 auto;
+}
 </style>
