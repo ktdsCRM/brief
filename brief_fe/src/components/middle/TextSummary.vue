@@ -25,7 +25,13 @@
     </div>
     <div class="outputText">
       <p>요약된 내용</p>
-      <p class="outputTextBox" align="justify">안녕하세요. 테스트 중입니다.</p>
+      <div>
+        <textarea
+          class="outputTextBox"
+          readonly
+          placeholder="출력된 결과입니다."
+        ></textarea>
+      </div>
     </div>
   </div>
 </template>
@@ -40,8 +46,6 @@ export default {};
 .TextSummary {
   height: 70%;
   margin-top: 4%;
-  position: absolute;
-  text-align: center;
 }
 .inputText {
   font-family: "NanumSquareRound";
