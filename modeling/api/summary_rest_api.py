@@ -27,8 +27,7 @@ class TextSummary(Resource):
             # Model Exec & Output Data
             result = summary(_fullText)
 
-            return {'result': result,
-                    'status' : 'success'}
+            return {'result': result}
 
         except Exception as e:
             return {'error': str(e)}
