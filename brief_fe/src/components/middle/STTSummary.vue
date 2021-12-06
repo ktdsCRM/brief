@@ -1,18 +1,28 @@
 <template>
-  <div class="TextSummary">
+  <div class="STTSummary">
     <div class="inputText">
       <div>
-        <p>요약할 원문을 하단에 입력해주세요.</p>
-        <button class="refreshBtn">
-          <i class="refreshIcon">
-            <font-awesome-icon icon="sync-alt" />
-          </i>
-        </button>
+        <p>음성 파일을 첨부해주세요.</p>
+        <div>
+            <button class="inputFileBtn">음성파일</button>
+        </div>
+        <div class="arrowIcon">
+            <font-awesome-icon icon="caret-down" />
+        </div>
+            <button class="exportBtn">추출하기</button>
+        <div>
+            <button class="refreshBtn">
+                <i class="refreshIcon">
+                    <font-awesome-icon icon="sync-alt" />
+                </i>
+            </button>
+        </div>
       </div>
       <div>
         <textarea
           class="inputTextBox"
-          placeholder="텍스트를 입력해주세요."
+          readonly
+          placeholder="추출된 결과입니다."
         ></textarea>
       </div>
     </div>
@@ -43,14 +53,35 @@ export default {};
 
 
 <style>
-.TextSummary {
-  height: 70%;
-  margin-top: 4%;
+.STTSummary {
+  height: 60%;
+  margin-top: 2%;
 }
 .inputText {
   font-family: "NanumSquareRound";
-  font-size: 14pt;
+  font-size: 12pt;
 }
+.inputFileBtn {
+  border: none;
+  height: 35px;
+  width: 100px;
+  font-size: 11pt;
+  border-radius: 8px;
+}
+.arrowIcon{
+  font-size: 2.5rem;
+  color: #cacaca;  
+}
+.exportBtn{
+  font-family: "NanumSquareRound";
+  font-size: 11pt;
+  border: none;
+  background-color: #51e3cc;
+  width: 125px;
+  height: 35px;
+  border-radius: 8px;
+}
+
 .refreshBtn {
   border: none;
   background-color: transparent;
@@ -61,7 +92,7 @@ export default {};
 }
 .inputTextBox {
   font-family: "NanumSquareRound";
-  font-size: 14pt;
+  font-size: 11pt;
   resize: none;
   width: 600px;
   height: 200px;
@@ -69,8 +100,7 @@ export default {};
 }
 .summaryBtn {
   font-family: "NanumSquareRound";
-  font-size: 14pt;
-  margin-top: 0.1%;
+  font-size: 11pt;
   border: none;
   background-color: #51e3cc;
   width: 125px;
@@ -79,7 +109,7 @@ export default {};
 }
 .outputText {
   font-family: "NanumSquareRound";
-  font-size: 14pt;
+  font-size: 11pt;
 }
 .outputTextBox {
   width: 600px;
@@ -88,12 +118,11 @@ export default {};
   border-radius: 8px;
 }
 .topIcon {
-  font-size: 3rem;
+  font-size: 2.5rem;
   color: #cacaca;
 }
 .bottomIcon {
-  margin-top: 0.5%;
-  font-size: 3rem;
+  font-size: 2.5rem;
   color: #cacaca;
 }
 

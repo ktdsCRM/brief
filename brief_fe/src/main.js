@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 import { library as faLibrary } from '@fortawesome/fontawesome-svg-core';
-import { faHome, faSearch, faCaretDown,faSyncAlt } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faSearch, faCaretDown, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'; 
 
 // Set up FontAwesome faLibrary.add(faHome, faSearch, faPlus) Vue.component('font-awesome-icon', FontAwesomeIcon)
