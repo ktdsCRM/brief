@@ -1,15 +1,16 @@
 <template>
   <div class="midText">
-    <TextSummary />
+    <router-view></router-view>
+    <!-- <TextSummary /> -->
   </div>
 </template>
 
 <script>
-import TextSummary from "../components/middle/TextSummary.vue";
-export default {
-  name: "Middle",
-  components: { TextSummary },
-};
+// import TextSummary from "../components/middle/TextSummary.vue";
+// export default {
+//   name: "Middle",
+//   components: { TextSummary },
+// };
 </script>
 
 <style>
