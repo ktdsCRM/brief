@@ -60,8 +60,14 @@ export default {
   margin-left: 5%;
 }
 #menu {
-  color: rgba(255, 255, 255, 1);
   margin: 0 10px;
+}
+a {
+  text-decoration: none !important;
+  color: rgba(255, 255, 255, 1) !important;
+}
+a:hover {
+  color: rgb(255, 255, 255, 0.5) !important;
 }
 
 @font-face {
