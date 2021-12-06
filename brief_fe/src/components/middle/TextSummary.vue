@@ -66,6 +66,7 @@ export default {};
   width: 600px;
   height: 200px;
   border-radius: 8px;
+  padding: 8px 12px;
 }
 .summaryBtn {
   font-family: "NanumSquareRound";
@@ -86,6 +87,7 @@ export default {};
   height: 200px;
   border: 1px solid black;
   border-radius: 8px;
+  padding: 8px 12px;
 }
 .topIcon {
   font-size: 3rem;
