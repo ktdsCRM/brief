@@ -8,9 +8,13 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav type="light">
-          <b-nav-item id="menu" href="#">텍스트</b-nav-item>
-          <b-nav-item id="menu" href="#">사진</b-nav-item>
-          <b-nav-item id="menu" href="#">음성</b-nav-item>
+          <b-nav-item id="menu"
+            ><router-link to="/textSummary">텍스트</router-link></b-nav-item
+          >
+          <b-nav-item id="menu"
+            ><router-link to="/test">사진</router-link></b-nav-item
+          >
+          <b-nav-item id="menu">음성</b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
