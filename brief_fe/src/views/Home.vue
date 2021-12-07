@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <!-- <HelloWorld msg="Welcome to Brief Service" /> -->
+    <router-view></router-view>
   </div>
 </template>
 

@@ -81,6 +81,9 @@ export default {};
   height: 35px;
   border-radius: 8px;
 }
+.exportBtn:hover {
+  background-color: rgb(90, 216, 197);
+}
 
 .refreshBtn {
   border: none;
@@ -107,6 +110,9 @@ export default {};
   width: 125px;
   height: 35px;
   border-radius: 8px;
+}
+.summaryBtn:hover {
+  background-color: rgb(90, 216, 197);
 }
 .outputText {
   font-family: "NanumSquareRound";
