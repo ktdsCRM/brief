@@ -73,10 +73,13 @@ export default {};
   font-size: 14pt;
   margin-top: 0.1%;
   border: none;
-  background-color: #51e3cc;
+  background-color: rgb(81, 227, 204);
   width: 125px;
   height: 35px;
   border-radius: 8px;
+}
+.summaryBtn:hover {
+  background-color: rgb(90, 216, 197);
 }
 .outputText {
   font-family: "NanumSquareRound";
