@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import TextSummary from '@/components/middle/TextSummary.vue'
 import Test from '@/components/middle/test.vue'
 import OCRSummary from '@/components/middle/OCRSummary.vue'
+import STTSummary from '@/components/middle/STTSummary.vue'
 
 Vue.use(VueRouter)
 
@@ -35,6 +36,11 @@ const routes = [
     path: '/ocrSummary',
     name: 'OCRSummary',
     component: OCRSummary,
+  },
+  {
+    path: '/sttSummary',
+    name: 'STTSummary',
+    component: STTSummary,
   }
 ]
 

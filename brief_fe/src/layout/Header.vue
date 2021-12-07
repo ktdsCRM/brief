@@ -14,7 +14,9 @@
           <b-nav-item id="menu"
             ><router-link to="/ocrSummary">사진</router-link></b-nav-item
           >
-          <b-nav-item id="menu">음성</b-nav-item>
+          <b-nav-item id="menu"
+            ><router-link to="/sttSummary">음성</router-link></b-nav-item
+          >
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
@@ -58,8 +60,14 @@ export default {
   margin-left: 5%;
 }
 #menu {
-  color: rgba(255, 255, 255, 1);
   margin: 0 10px;
+}
+a {
+  text-decoration: none !important;
+  color: rgba(255, 255, 255, 1) !important;
+}
+a:hover {
+  color: rgb(255, 255, 255, 0.5) !important;
 }
 
 @font-face {
