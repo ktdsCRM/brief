@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+// import Home from '../views/Home.vue'
 import TextSummary from '@/components/middle/TextSummary.vue'
 import Test from '@/components/middle/test.vue'
 import OCRSummary from '@/components/middle/OCRSummary.vue'
@@ -11,8 +11,8 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'TextSummary',
+    component: TextSummary
   },
   {
     path: '/about',
