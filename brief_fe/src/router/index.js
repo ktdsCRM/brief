@@ -2,7 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 // import Home from '../views/Home.vue'
 import TextSummary from '@/components/middle/TextSummary.vue'
-import Test from '@/components/middle/test.vue'
 import OCRSummary from '@/components/middle/OCRSummary.vue'
 import STTSummary from '@/components/middle/STTSummary.vue'
 
@@ -26,11 +25,6 @@ const routes = [
     path: '/textSummary',
     name: 'TextSummary',
     component: TextSummary,
-  },
-  {
-    path: '/test',
-    name: 'Test',
-    component: Test,
   },
   {
     path: '/ocrSummary',
