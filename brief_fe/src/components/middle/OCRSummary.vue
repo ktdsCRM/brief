@@ -3,8 +3,12 @@
     <div class="inputText">
       <div>
         <p>사진 파일을 첨부해주세요.</p>
-        <div>
+        <!-- <div>
           <button class="inputFileBtn">사진파일</button>
+        </div> -->
+        <div>
+          <input class="inputFile" type="file" @change="onFileSelected">
+          <!-- <input class="FileBtn" type="file" @change="onFileSelected"> -->
         </div>
         <div class="arrowIcon">
           <font-awesome-icon icon="caret-down" />
@@ -48,9 +52,20 @@
 
 
 <script>
-export default {};
+export default {
+  name: 'CorsReuqest',
+  data() {
+    return {
+      msg: 'Welcome'
+    }
+  },
+  methods: {
+    onFileSelected(event) {
+      console.log(event)
+    }
+  }
+}
 </script>
-
 
 <style>
 .OCRSummary {
@@ -61,13 +76,19 @@ export default {};
   font-family: "NanumSquareRound";
   font-size: 12pt;
 }
-.inputFileBtn {
+.inputFile{
+  padding:auto 0 !important;
+  height: 45px;
+  font-size: 11pt;
+  margin-left: 110px;
+}
+/* .inputFileBtn {
   border: none;
   height: 35px;
   width: 100px;
   font-size: 11pt;
   border-radius: 8px;
-}
+} */
 .arrowIcon {
   font-size: 2.5rem;
   color: #cacaca;
