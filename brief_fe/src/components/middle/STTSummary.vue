@@ -3,8 +3,17 @@
     <div class="inputText">
       <div>
         <p>음성 파일을 첨부해주세요.</p>
-        <div>
+        <!-- <div>
           <button class="inputFileBtn">음성파일</button>
+        </div> -->
+        <div class="inputFile">
+          <input type="file" @change="onFileSelected">
+        </div>
+        <div class="playWav">
+          <audio controls>
+            <source src="horse.ogg" type="audio/ogg">
+            <source src="horse.mp3" type="audio/mpeg">
+          </audio>
         </div>
         <div class="arrowIcon">
           <font-awesome-icon icon="caret-down" />
@@ -61,12 +70,21 @@ export default {};
   font-family: "NanumSquareRound";
   font-size: 12pt;
 }
-.inputFileBtn {
+.inputFile{
+  padding:auto 0 !important;
+  height: 45px;
+  font-size: 11pt;
+  margin-left: 110px;
+}
+/* .inputFileBtn {
   border: none;
   height: 35px;
   width: 100px;
   font-size: 11pt;
   border-radius: 8px;
+} */
+.playWav{
+  /* height: 60px; */
 }
 .arrowIcon {
   font-size: 2.5rem;
