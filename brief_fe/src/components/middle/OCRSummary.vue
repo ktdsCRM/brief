@@ -7,13 +7,13 @@
           <button class="inputFileBtn">사진파일</button>
         </div> -->
         <div>
-          <input class="inputFile" type="file" @change="onFileSelected">
-          <!-- <input class="FileBtn" type="file" @change="onFileSelected"> -->
+          <input type="file" class="imageFileInput" ref="imageFileInput"
+          accept="image/*" @change="onImageSelected" />
         </div>
         <div class="arrowIcon">
           <font-awesome-icon icon="caret-down" />
         </div>
-        <button class="exportBtn">추출하기</button>
+        <button class="exportBtn" ref="fileUpload" @click="fileUpload()">추출하기</button>
         <div>
           <button class="refreshBtn">
             <i class="refreshIcon">
@@ -53,15 +53,17 @@
 
 <script>
 export default {
-  name: 'CorsReuqest',
-  data() {
-    return {
-      msg: 'Welcome'
-    }
-  },
+  data: () => ({
+    formData: null
+  }),
   methods: {
-    onFileSelected(event) {
-      console.log(event)
+    onImageSelected() {
+      let image = this.$refs.imageFileInput.files[0];
+      this.formData = new FormData();
+      this.formData.append('image', image)
+    },
+    fileUpload() {
+  
     }
   }
 }
@@ -76,8 +78,7 @@ export default {
   font-family: "NanumSquareRound";
   font-size: 12pt;
 }
-.inputFile{
-  padding:auto 0 !important;
+.imageFileInput{
   height: 45px;
   font-size: 11pt;
   margin-left: 110px;
