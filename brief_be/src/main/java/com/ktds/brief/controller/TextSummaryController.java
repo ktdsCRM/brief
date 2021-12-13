@@ -8,14 +8,31 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.ktds.brief.service.TextSummaryService;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @CrossOrigin("*")
+@RequestMapping("/text")
 @RestController
 public class TextSummaryController {
+	
+	final private TextSummaryService testSummaryService;
+	
+	@PostMapping("/sum")
+	public String textSum(@RequestBody String text) {
+		String s = text;
+		return text;
+	}
+	
 	
 	@RequestMapping(value="/test", method=RequestMethod.GET, produces = "application/json; charset=utf-8")
 	public String textSummary() throws Exception{
