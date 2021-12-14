@@ -53,4 +53,17 @@ export default {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+/* 스크롤바 설정*/
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+/* 스크롤바 막대 설정*/
+::-webkit-scrollbar-thumb {
+  height: 17%;
+  background-color: rgb(168, 234, 243);
+  /* 스크롤바 둥글게 설정 */
+  border-radius: 10px;
+}
 </style>
