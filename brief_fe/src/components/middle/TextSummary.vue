@@ -12,6 +12,9 @@
       <div>
         <textarea
           class="inputTextBox"
+          id="input"
+          v-model="input"
+          ref="input"
           placeholder="텍스트를 입력해주세요."
         ></textarea>
       </div>
@@ -19,7 +22,7 @@
     <div class="topIcon">
       <font-awesome-icon icon="caret-down" />
     </div>
-    <button class="summaryBtn">요약</button>
+    <b-button class="summaryBtn" @click="check">요약</b-button>
     <div class="bottomIcon">
       <font-awesome-icon icon="caret-down" />
     </div>
@@ -38,7 +41,26 @@
 
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      input: "",
+    };
+  },
+  methods: {
+    check() {
+      let err = true;
+      let msg = "";
+      err &&
+        !this.input &&
+        ((msg = "텍스트를 입력해주세요."),
+        (err = false),
+        this.$refs.input.focus());
+      if (!err) alert(msg);
+      else this.send();
+    },
+  },
+};
 </script>
 
 
@@ -73,13 +95,13 @@ export default {};
   font-size: 14pt;
   margin-top: 0.1%;
   border: none;
-  background-color: rgb(81, 227, 204);
+  background-color: rgb(81, 227, 204) !important;
   width: 125px;
   height: 35px;
   border-radius: 8px;
 }
 .summaryBtn:hover {
-  background-color: rgb(90, 216, 197);
+  background-color: rgb(90, 216, 197) !important;
 }
 .outputText {
   font-family: "NanumSquareRound";
