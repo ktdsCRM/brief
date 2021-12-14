@@ -3,7 +3,7 @@
     <div class="inputText">
       <div>
         <p>요약할 원문을 하단에 입력해주세요.</p>
-        <button class="refreshBtn">
+        <button class="refreshBtn" @click="reload">
           <i class="refreshIcon">
             <font-awesome-icon icon="sync-alt" />
           </i>
@@ -78,6 +78,10 @@ export default {
         .then((response) => {
           (this.show = true), (this.output = response.data);
         });
+    },
+    //새로고침
+    reload() {
+      (this.input = ""), (this.output = ""), (this.show = false);
     },
   },
 };
