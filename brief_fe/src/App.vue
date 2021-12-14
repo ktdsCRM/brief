@@ -16,9 +16,6 @@
 import Header from "@/layout/Header.vue";
 import Footer from "./layout/Footer.vue";
 import Middle from "./layout/Middle.vue";
-// export default defineComponent({
-//   setup() {},
-// });
 
 export default {
   name: "App",
