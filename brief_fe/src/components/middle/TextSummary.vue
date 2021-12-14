@@ -28,10 +28,17 @@
     </div>
     <div class="outputText">
       <p>요약된 내용</p>
-      <div v-if="show" class="outputTextBox">
+      <div v-if="show === 'result'" class="outputTextBox">
         <p align="justify">
           {{ this.output }}
         </p>
+      </div>
+      <div v-else-if="show === 'waiting'">
+        <textarea
+          class="outputTextBox"
+          readonly
+          placeholder="... 입력된 내용을 요약하는 중입니다."
+        ></textarea>
       </div>
       <div v-else>
         <textarea
@@ -53,7 +60,7 @@ export default {
     return {
       input: "",
       output: "",
-      show: false,
+      show: "",
     };
   },
   methods: {
@@ -67,7 +74,7 @@ export default {
         (err = false),
         this.$refs.input.focus());
       if (!err) alert(msg);
-      else this.send();
+      else (this.show = "waiting"), this.send();
     },
     //요약
     send() {
@@ -76,12 +83,12 @@ export default {
           input: this.input,
         })
         .then((response) => {
-          (this.show = true), (this.output = response.data);
+          (this.show = "result"), (this.output = response.data);
         });
     },
     //새로고침
     reload() {
-      (this.input = ""), (this.output = ""), (this.show = false);
+      (this.input = ""), (this.output = ""), (this.show = "");
     },
   },
 };
