@@ -116,12 +116,14 @@ export default {
   margin-top: 0.1%;
   border: none;
   background-color: rgb(81, 227, 204) !important;
+  border-color: rgb(81, 227, 204) !important;
   width: 125px;
   height: 35px;
   border-radius: 8px;
 }
 .summaryBtn:hover {
   background-color: rgb(90, 216, 197) !important;
+  border-color: rgb(90, 216, 197) !important;
 }
 .outputText {
   font-family: "NanumSquareRound";
