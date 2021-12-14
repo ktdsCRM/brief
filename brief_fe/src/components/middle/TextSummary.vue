@@ -28,11 +28,16 @@
     </div>
     <div class="outputText">
       <p>요약된 내용</p>
-      <div>
+      <div v-if="show" class="outputTextBox">
+        <p align="justify">
+          {{ this.output }}
+        </p>
+      </div>
+      <div v-else>
         <textarea
           class="outputTextBox"
           readonly
-          placeholder="요약된 결과입니다."
+          placeholder="요약된 내용이 없습니다."
         ></textarea>
       </div>
     </div>
@@ -41,13 +46,18 @@
 
 
 <script>
+import http from "@/utils/http-common";
+
 export default {
   data() {
     return {
       input: "",
+      output: "",
+      show: false,
     };
   },
   methods: {
+    //입력 체크
     check() {
       let err = true;
       let msg = "";
@@ -58,6 +68,16 @@ export default {
         this.$refs.input.focus());
       if (!err) alert(msg);
       else this.send();
+    },
+    //요약
+    send() {
+      http
+        .post("text/sum", {
+          input: this.input,
+        })
+        .then((response) => {
+          (this.show = true), (this.output = response.data);
+        });
     },
   },
 };
