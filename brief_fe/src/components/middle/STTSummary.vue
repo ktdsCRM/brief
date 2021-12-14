@@ -7,12 +7,16 @@
           <button class="inputFileBtn">음성파일</button>
         </div> -->
         <div>
-          <input type="file" class="soundFileInput"
-          accept="audio/*" @change="onAudioSelected" />
+          <input
+            type="file"
+            class="soundFileInput"
+            accept="audio/*"
+            @change="onAudioSelected"
+          />
         </div>
         <div>
           <audio class="playWav" controls ref="playWav">
-            <source src="" ref="source">
+            <source src="" ref="source" />
           </audio>
         </div>
         <div class="arrowIcon">
@@ -62,10 +66,10 @@ export default {
     onAudioSelected(event) {
       const uploadSound = event.target.files[0];
       const audioSrc = window.URL.createObjectURL(uploadSound);
-      this.$refs.source.src = audioSrc; 
+      this.$refs.source.src = audioSrc;
       this.$refs.playWav.load();
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -79,7 +83,7 @@ export default {
   font-family: "NanumSquareRound";
   font-size: 12pt;
 }
-.soundFileInput{
+.soundFileInput {
   height: 45px;
   font-size: 11pt;
   margin-left: 110px;
@@ -147,6 +151,7 @@ export default {
   border: 1px solid black;
   border-radius: 8px;
   padding: 8px 12px;
+  margin: auto;
 }
 .topIcon {
   font-size: 2.5rem;

@@ -3,7 +3,7 @@
     <div class="inputText">
       <div>
         <p>요약할 원문을 하단에 입력해주세요.</p>
-        <button class="refreshBtn">
+        <button class="refreshBtn" @click="reload">
           <i class="refreshIcon">
             <font-awesome-icon icon="sync-alt" />
           </i>
@@ -12,6 +12,9 @@
       <div>
         <textarea
           class="inputTextBox"
+          id="input"
+          v-model="input"
+          ref="input"
           placeholder="텍스트를 입력해주세요."
         ></textarea>
       </div>
@@ -19,17 +22,29 @@
     <div class="topIcon">
       <font-awesome-icon icon="caret-down" />
     </div>
-    <button class="summaryBtn">요약</button>
+    <b-button class="summaryBtn" @click="check">요약</b-button>
     <div class="bottomIcon">
       <font-awesome-icon icon="caret-down" />
     </div>
     <div class="outputText">
       <p>요약된 내용</p>
-      <div>
+      <div v-if="show === 'result'" class="outputTextBox">
+        <p align="justify">
+          {{ this.output }}
+        </p>
+      </div>
+      <div v-else-if="show === 'waiting'">
         <textarea
           class="outputTextBox"
           readonly
-          placeholder="요약된 결과입니다."
+          placeholder="... 입력된 내용을 요약하는 중입니다."
+        ></textarea>
+      </div>
+      <div v-else>
+        <textarea
+          class="outputTextBox"
+          readonly
+          placeholder="요약된 내용이 없습니다."
         ></textarea>
       </div>
     </div>
@@ -38,7 +53,45 @@
 
 
 <script>
-export default {};
+import http from "@/utils/http-common";
+
+export default {
+  data() {
+    return {
+      input: "",
+      output: "",
+      show: "",
+    };
+  },
+  methods: {
+    //입력 체크
+    check() {
+      let err = true;
+      let msg = "";
+      err &&
+        !this.input &&
+        ((msg = "텍스트를 입력해주세요."),
+        (err = false),
+        this.$refs.input.focus());
+      if (!err) alert(msg);
+      else (this.show = "waiting"), this.send();
+    },
+    //요약
+    send() {
+      http
+        .post("text/sum", {
+          input: this.input,
+        })
+        .then((response) => {
+          (this.show = "result"), (this.output = response.data);
+        });
+    },
+    //새로고침
+    reload() {
+      (this.input = ""), (this.output = ""), (this.show = "");
+    },
+  },
+};
 </script>
 
 
@@ -73,13 +126,15 @@ export default {};
   font-size: 14pt;
   margin-top: 0.1%;
   border: none;
-  background-color: rgb(81, 227, 204);
+  background-color: rgb(81, 227, 204) !important;
+  border-color: rgb(81, 227, 204) !important;
   width: 125px;
   height: 35px;
   border-radius: 8px;
 }
 .summaryBtn:hover {
-  background-color: rgb(90, 216, 197);
+  background-color: rgb(90, 216, 197) !important;
+  border-color: rgb(90, 216, 197) !important;
 }
 .outputText {
   font-family: "NanumSquareRound";
