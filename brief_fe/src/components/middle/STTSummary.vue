@@ -24,7 +24,7 @@
         </div>
         <button class="exportBtn">추출하기</button>
         <div>
-          <button class="refreshBtn">
+          <button class="refreshBtn" @click="reload">
             <i class="refreshIcon">
               <font-awesome-icon icon="sync-alt" />
             </i>
@@ -68,6 +68,10 @@ export default {
       const audioSrc = window.URL.createObjectURL(uploadSound);
       this.$refs.source.src = audioSrc;
       this.$refs.playWav.load();
+    },
+    //새로고침
+    reload() {
+      (this.input = ""), (this.output = ""), (this.show = "");
     },
   },
 };
