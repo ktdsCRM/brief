@@ -13,7 +13,6 @@ const routes = [
     name: 'TextSummary',
     component: TextSummary
   },
-  // component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   {
     path: '/textSummary',
     name: 'TextSummary',
