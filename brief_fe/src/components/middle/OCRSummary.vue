@@ -7,15 +7,22 @@
           <button class="inputFileBtn">사진파일</button>
         </div> -->
         <div>
-          <input type="file" class="imageFileInput" ref="imageFileInput"
-          accept="image/*" @change="onImageSelected" />
+          <input
+            type="file"
+            class="imageFileInput"
+            ref="imageFileInput"
+            accept="image/*"
+            @change="onImageSelected"
+          />
         </div>
         <div class="arrowIcon">
           <font-awesome-icon icon="caret-down" />
         </div>
-        <button class="exportBtn" ref="fileUpload" @click="fileUpload()">추출하기</button>
+        <button class="exportBtn" ref="fileUpload" @click="fileUpload()">
+          추출하기
+        </button>
         <div>
-          <button class="refreshBtn">
+          <button class="refreshBtn" @click="reload">
             <i class="refreshIcon">
               <font-awesome-icon icon="sync-alt" />
             </i>
@@ -54,19 +61,21 @@
 <script>
 export default {
   data: () => ({
-    formData: null
+    formData: null,
   }),
   methods: {
     onImageSelected() {
       let image = this.$refs.imageFileInput.files[0];
       this.formData = new FormData();
-      this.formData.append('image', image)
+      this.formData.append("image", image);
     },
-    fileUpload() {
-  
-    }
-  }
-}
+    fileUpload() {},
+    //새로고침
+    reload() {
+      (this.input = ""), (this.output = ""), (this.show = "");
+    },
+  },
+};
 </script>
 
 <style>
@@ -78,7 +87,7 @@ export default {
   font-family: "NanumSquareRound";
   font-size: 12pt;
 }
-.imageFileInput{
+.imageFileInput {
   height: 45px;
   font-size: 11pt;
   margin-left: 110px;
