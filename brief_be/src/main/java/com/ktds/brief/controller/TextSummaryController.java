@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 public class TextSummaryController {
 
-	final private TextSummaryService textSummaryService;
+	final private TextSummaryService textSummaryService; 
 	
 	@RequestMapping(value = "/sum", method = {RequestMethod.POST, RequestMethod.GET}, produces = "application/json; charset=utf-8")
 	public Object textSummary(@RequestBody String input) throws Exception{
