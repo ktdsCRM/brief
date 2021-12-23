@@ -3,16 +3,14 @@
     <div class="inputText">
       <div>
         <p>사진 파일을 첨부해주세요.</p>
-        <!-- <div>
-          <button class="inputFileBtn">사진파일</button>
-        </div> -->
         <div>
           <input
             type="file"
             class="imageFileInput"
+            id="imageFileInput"
             ref="imageFileInput"
             accept="image/*"
-            @change="onImageSelected"
+            @change="selectFile"
           />
         </div>
         <div class="arrowIcon">
@@ -29,11 +27,23 @@
           </button>
         </div>
       </div>
-      <div>
+      <div v-if="extract === 'result'" class="outputTextBox">
+        <p align="justify">
+          {{ this.export }}
+        </p>
+      </div>
+      <div v-else-if="extract === 'waiting'">
         <textarea
-          class="inputTextBox"
+          class="outputTextBox"
           readonly
-          placeholder="추출된 결과입니다."
+          placeholder="... 사진에서 텍스트를 추출하는 중입니다."
+        ></textarea>
+      </div>
+      <div v-else>
+        <textarea
+          class="outputTextBox"
+          readonly
+          placeholder="추출된 내용이 없습니다."
         ></textarea>
       </div>
     </div>
@@ -59,20 +69,55 @@
 
 
 <script>
+import axios from "axios";
+import SERVER from "@/utils/api.js";
+
 export default {
-  data: () => ({
-    formData: null,
-  }),
+  data: function () {
+    return {
+      output: "",
+      show: "",
+      export: "",
+      extract: "",
+    };
+  },
   methods: {
     onImageSelected() {
       let image = this.$refs.imageFileInput.files[0];
       this.formData = new FormData();
       this.formData.append("image", image);
     },
-    fileUpload() {},
+    //사진선택
+    selectFile(e) {
+      const file = e.target.files[0];
+      this.image = URL.createObjectURL(file);
+      console.log(this.image);
+      console.log(process.env);
+    },
+    //추출
+    fileUpload() {
+      console.log("come"), (this.extract = "waiting");
+      let formData = new FormData();
+      let imgFile = document.getElementById("imageFileInput");
+      formData.append("image", imgFile.files[0]);
+      axios
+        .post(`${SERVER.ROUTES.OCR}`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `KakaoAK ${process.env.VUE_APP_OCR_REST_API_KEY}`,
+          },
+        })
+        .then((response) => {
+          (this.export = response.data), (this.extract = "result");
+        });
+      console.log("come2");
+    },
     //새로고침
     reload() {
-      (this.input = ""), (this.output = ""), (this.show = "");
+      (this.input = ""),
+        (this.output = ""),
+        (this.extract = ""),
+        (this.show = "");
     },
   },
 };
@@ -126,10 +171,12 @@ export default {
 }
 .inputTextBox {
   font-family: "NanumSquareRound";
-  font-size: 11pt;
+  font-size: 14pt;
   resize: none;
+  padding: 8px 12px;
   width: 600px;
   height: 200px;
+  border: 1px solid black;
   border-radius: 8px;
   padding: 8px 12px;
 }
