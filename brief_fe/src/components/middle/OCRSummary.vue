@@ -82,21 +82,20 @@ export default {
     };
   },
   methods: {
-    onImageSelected() {
-      let image = this.$refs.imageFileInput.files[0];
-      this.formData = new FormData();
-      this.formData.append("image", image);
-    },
+    // onImageSelected() {
+    //   let image = this.$refs.imageFileInput.files[0];
+    //   this.formData = new FormData();
+    //   this.formData.append("image", image);
+    // },
     //사진선택
     selectFile(e) {
       const file = e.target.files[0];
       this.image = URL.createObjectURL(file);
-      console.log(this.image);
-      console.log(process.env);
+      // console.log(process.env);
     },
     //추출
     fileUpload() {
-      console.log("come"), (this.extract = "waiting");
+      this.extract = "waiting";
       let formData = new FormData();
       let imgFile = document.getElementById("imageFileInput");
       formData.append("image", imgFile.files[0]);
@@ -110,7 +109,6 @@ export default {
         .then((response) => {
           (this.export = response.data), (this.extract = "result");
         });
-      console.log("come2");
     },
     //새로고침
     reload() {
@@ -137,13 +135,6 @@ export default {
   font-size: 11pt;
   margin-left: 110px;
 }
-/* .inputFileBtn {
-  border: none;
-  height: 35px;
-  width: 100px;
-  font-size: 11pt;
-  border-radius: 8px;
-} */
 .arrowIcon {
   font-size: 2.5rem;
   color: #cacaca;
