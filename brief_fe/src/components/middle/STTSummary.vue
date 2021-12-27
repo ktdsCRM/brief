@@ -181,6 +181,7 @@ export default {
   padding: 8px 12px;
   font-size: 11pt;
   margin: auto;
+  border: 1px solid black;
 }
 .exportBtn,
 .summaryBtn {
