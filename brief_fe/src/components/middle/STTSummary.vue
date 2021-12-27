@@ -21,7 +21,7 @@
           <font-awesome-icon icon="caret-down" />
         </div>
         <button class="exportBtn" ref="fileUpload" @click="fileUpload()">
-          >추출하기
+          추출하기
         </button>
         <div>
           <button class="refreshBtn" @click="reload">
@@ -54,17 +54,29 @@
     <div class="topIcon">
       <font-awesome-icon icon="caret-down" />
     </div>
-    <button class="summaryBtn">요약</button>
+    <button class="summaryBtn" @click="send">요약</button>
     <div class="bottomIcon">
       <font-awesome-icon icon="caret-down" />
     </div>
     <div class="outputText">
       <p>요약된 내용</p>
-      <div>
+      <div v-if="show === 'result'" class="outputTextBox">
+        <p align="justify">
+          {{ this.output }}
+        </p>
+      </div>
+      <div v-else-if="show === 'waiting'">
         <textarea
           class="outputTextBox"
           readonly
-          placeholder="요약된 결과입니다."
+          placeholder="... 입력된 내용을 요약하는 중입니다."
+        ></textarea>
+      </div>
+      <div v-else>
+        <textarea
+          class="outputTextBox"
+          readonly
+          placeholder="요약된 내용이 없습니다."
         ></textarea>
       </div>
     </div>
@@ -74,7 +86,7 @@
 
 <script>
 import axios from "axios";
-// import http from "@/utils/http-common";
+import http from "@/utils/http-common";
 
 export default {
   data: function () {
@@ -111,6 +123,16 @@ export default {
         })
         .then((response) => {
           (this.export = response.data), (this.extract = "result");
+        });
+    },
+    //요약
+    send() {
+      http
+        .post("text/sum", {
+          input: this.export,
+        })
+        .then((response) => {
+          (this.show = "result"), (this.output = response.data);
         });
     },
     //새로고침
