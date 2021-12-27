@@ -1,7 +1,7 @@
 <template>
   <div class="TextSummary">
     <div class="inputText">
-      <div>
+      <div class="infoText">
         <p>요약할 원문을 하단에 입력해주세요.</p>
         <button class="refreshBtn" @click="reload">
           <i class="refreshIcon">
@@ -22,12 +22,14 @@
     <div class="topIcon">
       <font-awesome-icon icon="caret-down" />
     </div>
-    <b-button class="summaryBtn" @click="check">요약</b-button>
+    <b-button class="summaryBtn" @click="check">요약하기</b-button>
     <div class="bottomIcon">
       <font-awesome-icon icon="caret-down" />
     </div>
     <div class="outputText">
-      <p>요약된 내용</p>
+      <div class="infoText">
+        <p>요약된 내용</p>
+      </div>
       <div v-if="show === 'result'" class="outputTextBox">
         <p align="justify">
           {{ this.output }}
@@ -100,9 +102,44 @@ export default {
   height: 70%;
   margin-top: 4%;
 }
-.inputText {
+.inputText,
+.outputText {
   font-family: "NanumSquareRound";
-  font-size: 14pt;
+  font-size: 11pt;
+}
+.infoText {
+  font-size: 13pt;
+}
+.inputTextBox,
+.outputTextBox {
+  font-family: "NanumSquareRound";
+  resize: none;
+  width: 600px;
+  height: 200px;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 11pt;
+  margin: auto;
+  border: 1px solid black;
+}
+.summaryBtn {
+  font-family: "NanumSquareRound";
+  color: #fff !important;
+  border: none;
+  background-color: rgb(81, 227, 204) !important;
+  border-color: rgb(81, 227, 204) !important;
+  width: 125px;
+  height: 35px;
+  border-radius: 8px !important;
+}
+.summaryBtn:hover {
+  background-color: rgb(90, 216, 197) !important;
+  border-color: rgb(90, 216, 197) !important;
+}
+.topIcon,
+.bottomIcon {
+  font-size: 2.5rem;
+  color: #cacaca;
 }
 .refreshBtn {
   border: none;
@@ -111,50 +148,6 @@ export default {
 }
 .refreshIcon {
   color: #51e3cc;
-}
-.inputTextBox {
-  font-family: "NanumSquareRound";
-  font-size: 14pt;
-  resize: none;
-  width: 600px;
-  height: 200px;
-  border-radius: 8px;
-  padding: 8px 12px;
-}
-.summaryBtn {
-  font-family: "NanumSquareRound";
-  font-size: 14pt;
-  margin-top: 0.1%;
-  border: none;
-  background-color: rgb(81, 227, 204) !important;
-  border-color: rgb(81, 227, 204) !important;
-  width: 125px;
-  height: 35px;
-  border-radius: 8px;
-}
-.summaryBtn:hover {
-  background-color: rgb(90, 216, 197) !important;
-  border-color: rgb(90, 216, 197) !important;
-}
-.outputText {
-  font-family: "NanumSquareRound";
-  font-size: 14pt;
-}
-.outputTextBox {
-  width: 600px;
-  height: 200px;
-  border: 1px solid black;
-  border-radius: 8px;
-  padding: 8px 12px;
-}
-.topIcon {
-  font-size: 3rem;
-  color: #cacaca;
-}
-.bottomIcon {
-  margin-top: 0.5%;
-  font-size: 3rem;
-  color: #cacaca;
 }
 
 @import url(//fonts.googleapis.com/earlyaccess/jejumyeongjo.css);
