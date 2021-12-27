@@ -52,7 +52,8 @@
     <div class="topIcon">
       <font-awesome-icon icon="caret-down" />
     </div>
-    <button class="summaryBtn">요약하기</button>
+
+    <b-button class="summaryBtn" @click="send">요약하기</b-button>
     <div class="bottomIcon">
       <font-awesome-icon icon="caret-down" />
     </div>
@@ -61,18 +62,33 @@
         <p>요약된 내용</p>
       </div>
       <div>
+      <div v-if="show === 'result'" class="outputTextBox">
+        <p align="justify">
+          {{ this.output }}
+        </p>
+      </div>
+      <div v-else-if="show === 'waiting'">
         <textarea
           class="outputTextBox"
           readonly
-          placeholder="요약된 결과입니다."
+          placeholder="... 입력된 내용을 요약하는 중입니다."
+        ></textarea>
+      </div>
+      <div v-else>
+        <textarea
+          class="outputTextBox"
+          readonly
+          placeholder="요약된 내용이 없습니다."
         ></textarea>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
 
 <script>
+import http from "@/utils/http-common";
 import axios from "axios";
 import SERVER from "@/utils/api.js";
 
@@ -111,7 +127,10 @@ export default {
           },
         })
         .then((response) => {
-          (this.export = response.data), (this.extract = "result");
+          (this.extract = "result");
+          for (var i=0; i < response.data['result'].length; i++) {
+            this.export += response.data['result'][i]['recognition_words'][0]
+          }
         });
     },
     //새로고침
@@ -121,6 +140,19 @@ export default {
         (this.extract = ""),
         (this.show = "");
     },
+
+    //요약
+    send() {
+      this.show = "waiting";
+      http
+        .post("ocr/sum", {
+          input: this.export,
+        })
+        .then((response) => {
+          (this.show = "result"), (this.output = response.data);
+        });
+    },
+
   },
 };
 </script>
