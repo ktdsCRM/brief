@@ -3,13 +3,11 @@
     <div class="inputText">
       <div>
         <p>음성 파일을 첨부해주세요.</p>
-        <!-- <div>
-          <button class="inputFileBtn">음성파일</button>
-        </div> -->
         <div>
           <input
             type="file"
             class="soundFileInput"
+            id="soundFileInput"
             accept="audio/*"
             @change="onAudioSelected"
           />
@@ -22,7 +20,9 @@
         <div class="arrowIcon">
           <font-awesome-icon icon="caret-down" />
         </div>
-        <button class="exportBtn">추출하기</button>
+        <button class="exportBtn" ref="fileUpload" @click="fileUpload()">
+          >추출하기
+        </button>
         <div>
           <button class="refreshBtn" @click="reload">
             <i class="refreshIcon">
@@ -31,11 +31,23 @@
           </button>
         </div>
       </div>
-      <div>
+      <div v-if="extract === 'result'" class="outputTextBox">
+        <p align="justify">
+          {{ this.export }}
+        </p>
+      </div>
+      <div v-else-if="extract === 'waiting'">
         <textarea
-          class="inputTextBox"
+          class="outputTextBox"
           readonly
-          placeholder="추출된 결과입니다."
+          placeholder="... 음성에서 텍스트를 추출하는 중입니다."
+        ></textarea>
+      </div>
+      <div v-else>
+        <textarea
+          class="outputTextBox"
+          readonly
+          placeholder="추출된 내용이 없습니다."
         ></textarea>
       </div>
     </div>
@@ -61,13 +73,45 @@
 
 
 <script>
+import axios from "axios";
+// import http from "@/utils/http-common";
+
 export default {
+  data: function () {
+    return {
+      output: "",
+      show: "",
+      export: "",
+      extract: "",
+    };
+  },
   methods: {
+    //음성선택
     onAudioSelected(event) {
       const uploadSound = event.target.files[0];
       const audioSrc = window.URL.createObjectURL(uploadSound);
       this.$refs.source.src = audioSrc;
       this.$refs.playWav.load();
+    },
+    //추출
+    fileUpload() {
+      this.extract = "waiting";
+      var formData = new FormData();
+      var soundFile = document.getElementById("soundFileInput");
+      console.log(soundFile);
+      formData.append("soundFile", soundFile.files[0]);
+      for (var value of formData.values()) {
+        console.log(value);
+      }
+      axios
+        .post("http://localhost:9090/stt/export", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((response) => {
+          (this.export = response.data), (this.extract = "result");
+        });
     },
     //새로고침
     reload() {
