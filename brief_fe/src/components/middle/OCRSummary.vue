@@ -62,27 +62,27 @@
         <p>요약된 내용</p>
       </div>
       <div>
-      <div v-if="show === 'result'" class="outputTextBox">
-        <p align="justify">
-          {{ this.output }}
-        </p>
-      </div>
-      <div v-else-if="show === 'waiting'">
-        <textarea
-          class="outputTextBox"
-          readonly
-          placeholder="... 입력된 내용을 요약하는 중입니다."
-        ></textarea>
-      </div>
-      <div v-else>
-        <textarea
-          class="outputTextBox"
-          readonly
-          placeholder="요약된 내용이 없습니다."
-        ></textarea>
+        <div v-if="show === 'result'" class="outputTextBox">
+          <p align="justify">
+            {{ this.output }}
+          </p>
+        </div>
+        <div v-else-if="show === 'waiting'">
+          <textarea
+            class="outputTextBox"
+            readonly
+            placeholder="... 입력된 내용을 요약하는 중입니다."
+          ></textarea>
+        </div>
+        <div v-else>
+          <textarea
+            class="outputTextBox"
+            readonly
+            placeholder="요약된 내용이 없습니다."
+          ></textarea>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -127,9 +127,9 @@ export default {
           },
         })
         .then((response) => {
-          (this.extract = "result");
-          for (var i=0; i < response.data['result'].length; i++) {
-            this.export += response.data['result'][i]['recognition_words'][0]
+          this.extract = "result";
+          for (var i = 0; i < response.data["result"].length; i++) {
+            this.export += response.data["result"][i]["recognition_words"][0];
           }
         });
     },
@@ -152,7 +152,6 @@ export default {
           (this.show = "result"), (this.output = response.data);
         });
     },
-
   },
 };
 </script>
@@ -186,6 +185,7 @@ export default {
   font-size: 11pt;
   margin: auto;
   border: 1px solid black;
+  overflow: scroll;
 }
 .exportBtn,
 .summaryBtn {
