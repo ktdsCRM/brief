@@ -15,11 +15,13 @@ public class Sum {
 	
 	private String text;
 	private String sumText;
+	private String type;
 	
 	@Builder
-	public Sum(String text, String sumText) {
+	public Sum(String text, String sumText, String type) {
 		this.text = text;
 		this.sumText = sumText;
+		this.type = type
 	}
 
 	

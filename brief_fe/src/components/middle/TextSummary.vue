@@ -83,6 +83,7 @@ export default {
       http
         .post("text/sum", {
           input: this.input,
+          type:"TEXT"
         })
         .then((response) => {
           (this.show = "result"), (this.output = response.data);

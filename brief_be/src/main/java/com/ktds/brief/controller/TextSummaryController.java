@@ -1,5 +1,7 @@
 package com.ktds.brief.controller;
 
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,8 +23,13 @@ public class TextSummaryController {
 	final private TextSummaryService textSummaryService; 
 	
 	@RequestMapping(value = "/sum", method = {RequestMethod.POST, RequestMethod.GET}, produces = "application/json; charset=utf-8")
-	public Object textSummary(@RequestBody String input) throws Exception{
+//	public Object textSummary(@RequestBody String input) throws Exception{
+	public String textSummary(@RequestBody Map<String, String> json) {
+		String input = json.get("input");
+		System.out.println("1111111111111" + input);
+
 		String textRes = textSummaryService.getTextSum(input);
+//		println(textRes);
 		return new ResponseEntity<>(textRes, HttpStatus.OK);
 	}
 
