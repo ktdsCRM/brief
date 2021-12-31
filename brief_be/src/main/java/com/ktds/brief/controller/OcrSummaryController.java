@@ -23,10 +23,17 @@ import lombok.RequiredArgsConstructor;
 @RestController
 public class OcrSummaryController {
 	
-	final private TextSummaryService textSummaryService;
 //	final private OcrSucmmaryService ocrSucmmaryService;
-
-//	//텍스트 추출
+	final private TextSummaryService textSummaryService;
+	
+	@RequestMapping(value = "/export", method = {RequestMethod.POST, RequestMethod.GET}, produces = "application/json; charset=utf-8")
+	public Object ocrSummary(@RequestBody String input) throws Exception{
+		System.out.println("111111111111111" +input);
+		return input;
+	}
+		
+		
+//	//파일명 추출
 //	@RequestMapping(value = "/export", method = {RequestMethod.POST, RequestMethod.GET}, produces = "application/json; charset=utf-8")
 //	public Object ocrSummary(@RequestParam("soundFile") MultipartFile multipartFiles) throws Exception{
 //		String UPLOAD_PATH = "C://Users/82103/Desktop/soundFiles/";

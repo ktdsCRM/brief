@@ -105,8 +105,16 @@ export default {
     //사진선택
     selectFile(e) {
       const file = e.target.files[0];
-      this.image = URL.createObjectURL(file);
-      // console.log(process.env);
+      //파일명
+      let fileName = file['name'];
+      //파일의 확장자 추출
+      var fileDot = fileName.split('.').pop()
+      //가능한 확장자
+      var dotArray = ["bmp", "dib", "jpeg", "jpg", "jpe", "jp2", "png", "webp", "pbm", "pgm", "ppm", "sr", "ras", "tiff", "tif"];
+      if(dotArray.includes(fileDot)==false){
+        alert(fileDot+'파일은 업로드 하실 수 없습니다.');
+        this.$refs.imageFileInput.value = '';
+      }
     },
     //추출
     fileUpload() {
@@ -129,15 +137,16 @@ export default {
         });
       // axios
       //   .post("ocr/export", {
-      //     input: this.input
-      //   })
+      //     input: imgFile.files[0]
+      //   });
     },
     //새로고침
     reload() {
       (this.input = ""),
-        (this.output = ""),
-        (this.extract = ""),
-        (this.show = "");
+      (this.output = ""),
+      (this.extract = ""),
+      (this.show = ""),
+      (this.$refs.imageFileInput.value = '');
     },
     //요약
     send() {
