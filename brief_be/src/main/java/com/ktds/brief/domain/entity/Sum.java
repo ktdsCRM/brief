@@ -18,9 +18,9 @@ public class Sum {
 	
 	@Builder
 	public Sum(String text, String sumText) {
+		
 		this.text = text;
 		this.sumText = sumText;
 	}
-
 	
 }

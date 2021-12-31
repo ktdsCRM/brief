@@ -2,6 +2,8 @@ package com.ktds.brief.controller;
 
 import java.io.File;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -40,8 +42,14 @@ public class SttSummaryController {
 	
 	//텍스트 요약
 	@RequestMapping(value = "/sum", method = {RequestMethod.POST, RequestMethod.GET}, produces = "application/json; charset=utf-8")
-	public Object textSummary(@RequestBody String input) throws Exception{
+	public Object textSummary(@RequestBody String text) throws Exception{
+		
+		JSONParser parser = new JSONParser();
+		Object obj = parser.parse(text);
+		JSONObject j = (JSONObject)obj;
+		String input = (String) j.get("input");		
 		String textRes = textSummaryService.getTextSum(input);
+		
 		return new ResponseEntity<>(textRes, HttpStatus.OK);
 	}
 

@@ -116,20 +116,18 @@ export default {
       //가능한 확장자
       var dotArray = ["opus", "flac", "webm", "weba", "wav", "ogg", "m4a", "mp3", "oga", "mid", "amr", "aiff", "wma", "au", "aa"];
       if(dotArray.includes(fileDot)==false){
-        alert(fileDot+'파일은 업로드 하실 수 없습니다.');
+        alert(fileDot+' 파일은 업로드 하실 수 없습니다.');
         this.$refs.soundFileInput.value = '';
       }
     },
     //추출
     fileUpload() {
+      this.output = "",
+      this.show = "",
       this.extract = "waiting";
       var formData = new FormData();
       var soundFile = document.getElementById("soundFileInput");
-      console.log(soundFile);
       formData.append("soundFile", soundFile.files[0]);
-      for (var value of formData.values()) {
-        console.log(value);
-      }
       axios
         .post("http://localhost:9090/stt/export", formData, {
           headers: {

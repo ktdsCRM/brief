@@ -2,6 +2,8 @@ package com.ktds.brief.controller;
 
 import java.io.File;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,31 +25,20 @@ import lombok.RequiredArgsConstructor;
 @RestController
 public class OcrSummaryController {
 	
-//	final private OcrSucmmaryService ocrSucmmaryService;
 	final private TextSummaryService textSummaryService;
-	
-	@RequestMapping(value = "/export", method = {RequestMethod.POST, RequestMethod.GET}, produces = "application/json; charset=utf-8")
-	public Object ocrSummary(@RequestBody String input) throws Exception{
-		System.out.println("111111111111111" +input);
-		return input;
-	}
-		
-		
-//	//파일명 추출
-//	@RequestMapping(value = "/export", method = {RequestMethod.POST, RequestMethod.GET}, produces = "application/json; charset=utf-8")
-//	public Object ocrSummary(@RequestParam("soundFile") MultipartFile multipartFiles) throws Exception{
-//		String UPLOAD_PATH = "C://Users/82103/Desktop/soundFiles/";
-//		String originalfileName = multipartFiles.getOriginalFilename();
-//		String filePath = UPLOAD_PATH+originalfileName;
-//		File dest = new File(filePath);//파일을 저장하기 위한 파일 객체 생성
-//		multipartFiles.transferTo(dest);//파일 저장
-//		String sttRes = sttSummaryService.getSttSum(filePath);
-//		return new ResponseEntity<>(sttRes, HttpStatus.OK);
-//	}
 	
 	//텍스트 요약
 	@RequestMapping(value = "/sum", method = {RequestMethod.POST, RequestMethod.GET}, produces = "application/json; charset=utf-8")
-	public Object textSummary(@RequestBody String input) throws Exception{
+	public Object textSummary(@RequestBody String text) throws Exception{
+
+		JSONParser parser = new JSONParser();
+		Object obj = parser.parse(text);
+		JSONObject j = (JSONObject)obj;
+		String input = (String) j.get("input");
+		String filename = (String) j.get("filename");
+
+		System.out.println("filename : "+filename);
+		
 		String textRes = textSummaryService.getTextSum(input);
 		return new ResponseEntity<>(textRes, HttpStatus.OK);	
 	}

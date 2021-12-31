@@ -14,7 +14,6 @@ import org.springframework.web.client.RestTemplate;
 import com.ktds.brief.domain.entity.Sum;
 import com.ktds.brief.domain.repository.SumMongoDBRepository;
 import com.ktds.brief.service.TextSummaryService;
-
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -37,9 +36,7 @@ public class TextSummaryServiceImpl implements TextSummaryService {
 		restTemplate.getMessageConverters().add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
 
 		ResponseEntity<String> res = restTemplate.postForEntity(url, parameters, String.class);
-		System.out.println(input);
-		System.out.println(res.getBody());
-
+		
 		Sum entity = Sum.builder().text(input).sumText(res.getBody()).build();
 		sumMongoDBRepository.save(entity);
 		

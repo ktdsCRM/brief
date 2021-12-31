@@ -15,6 +15,9 @@
             @change="selectFile"
           />
         </div>
+        <div class="img_wrap">
+          <img id = "img" />
+        </div>
         <div class="arrowIcon">
           <font-awesome-icon icon="caret-down" />
         </div>
@@ -99,6 +102,7 @@ export default {
       show: "",
       export: "",
       extract: "",
+      fileName: "",
     };
   },
   methods: {
@@ -106,18 +110,20 @@ export default {
     selectFile(e) {
       const file = e.target.files[0];
       //파일명
-      let fileName = file['name'];
+      this.fileName = file['name'];
       //파일의 확장자 추출
-      var fileDot = fileName.split('.').pop()
+      var fileDot = this.fileName.split('.').pop()
       //가능한 확장자
       var dotArray = ["bmp", "dib", "jpeg", "jpg", "jpe", "jp2", "png", "webp", "pbm", "pgm", "ppm", "sr", "ras", "tiff", "tif"];
       if(dotArray.includes(fileDot)==false){
-        alert(fileDot+'파일은 업로드 하실 수 없습니다.');
+        alert(fileDot+' 파일은 업로드 하실 수 없습니다.');
         this.$refs.imageFileInput.value = '';
       }
     },
     //추출
     fileUpload() {
+      this.output = "",
+      this.show = "",
       this.extract = "waiting";
       let formData = new FormData();
       let imgFile = document.getElementById("imageFileInput");
@@ -130,15 +136,12 @@ export default {
           },
         })
         .then((response) => {
+          this.export = "";
           this.extract = "result";
           for (var i = 0; i < response.data["result"].length; i++) {
             this.export += response.data["result"][i]["recognition_words"][0];
           }
         });
-      // axios
-      //   .post("ocr/export", {
-      //     input: imgFile.files[0]
-      //   });
     },
     //새로고침
     reload() {
@@ -153,7 +156,8 @@ export default {
       this.show = "waiting";
       http
         .post("ocr/sum", {
-          input: this.export
+          input: this.export,
+          filename: this.fileName
         })
         .then((response) => {
           (this.show = "result"), (this.output = response.data);
