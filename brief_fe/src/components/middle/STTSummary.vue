@@ -133,8 +133,8 @@ export default {
     send() {
       this.show = "waiting";
       http
-        .post("text/sum", {
-          input: this.export,
+        .post("stt/sum", {
+          input: this.export
         })
         .then((response) => {
           (this.show = "result"), (this.output = response.data);
