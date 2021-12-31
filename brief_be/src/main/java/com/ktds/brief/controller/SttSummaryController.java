@@ -35,7 +35,6 @@ public class SttSummaryController {
 		File dest = new File(filePath);//파일을 저장하기 위한 파일 객체 생성
 		multipartFiles.transferTo(dest);//파일 저장
 		String sttRes = sttSummaryService.getSttSum(filePath);
-		
 		return new ResponseEntity<>(sttRes, HttpStatus.OK);
 	}
 	

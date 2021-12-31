@@ -102,11 +102,6 @@ export default {
     };
   },
   methods: {
-    // onImageSelected() {
-    //   let image = this.$refs.imageFileInput.files[0];
-    //   this.formData = new FormData();
-    //   this.formData.append("image", image);
-    // },
     //사진선택
     selectFile(e) {
       const file = e.target.files[0];
@@ -132,6 +127,10 @@ export default {
             this.export += response.data['result'][i]['recognition_words'][0]
           }
         });
+      // axios
+      //   .post("ocr/export", {
+      //     input: this.input
+      //   })
     },
     //새로고침
     reload() {
@@ -140,13 +139,12 @@ export default {
         (this.extract = ""),
         (this.show = "");
     },
-
     //요약
     send() {
       this.show = "waiting";
       http
         .post("ocr/sum", {
-          input: this.export,
+          input: this.export
         })
         .then((response) => {
           (this.show = "result"), (this.output = response.data);
