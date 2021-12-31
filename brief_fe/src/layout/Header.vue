@@ -17,6 +17,9 @@
           <b-nav-item id="menu"
             ><router-link to="/sttSummary">음성</router-link></b-nav-item
           >
+          <b-nav-item id="menu"
+            ><router-link to="/sumList">요약 목록</router-link></b-nav-item
+          >
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
