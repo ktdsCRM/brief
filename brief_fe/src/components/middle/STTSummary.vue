@@ -39,19 +39,15 @@
           {{ this.export }}
         </p>
       </div>
-      <div v-else-if="extract === 'waiting'">
-        <textarea
-          class="outputTextBox"
-          readonly
-          placeholder="... 음성에서 텍스트를 추출하는 중입니다."
-        ></textarea>
+      <div v-else-if="extract === 'waiting'" class="outputTextBox">
+        <p style="color:#808080" align="justify">
+          {{"... 음성에서 텍스트를 추출하는 중입니다."}}
+        </p>
       </div>
-      <div v-else>
-        <textarea
-          class="outputTextBox"
-          readonly
-          placeholder="추출된 내용이 없습니다."
-        ></textarea>
+      <div v-else class="outputTextBox">
+        <p style="color:#808080" align="justify">
+          {{"추출된 내용이 없습니다."}}
+        </p>
       </div>
     </div>
     <div class="topIcon">
@@ -70,19 +66,15 @@
           {{ this.output }}
         </p>
       </div>
-      <div v-else-if="show === 'waiting'">
-        <textarea
-          class="outputTextBox"
-          readonly
-          placeholder="... 입력된 내용을 요약하는 중입니다."
-        ></textarea>
+      <div v-else-if="show === 'waiting'" class="outputTextBox">
+        <p style="color:#808080" align="justify">
+          {{"... 입력된 내용을 요약하는 중입니다."}}
+        </p>
       </div>
-      <div v-else>
-        <textarea
-          class="outputTextBox"
-          readonly
-          placeholder="요약된 내용이 없습니다."
-        ></textarea>
+      <div v-else class="outputTextBox">
+        <p style="color:#808080" align="justify">
+          {{"요약된 내용이 없습니다."}}
+        </p>
       </div>
     </div>
   </div>
@@ -106,9 +98,12 @@ export default {
     //음성선택
     onAudioSelected(event) {
       const uploadSound = event.target.files[0];
+      //2. 파일 오디오 기능
       const audioSrc = window.URL.createObjectURL(uploadSound);
       this.$refs.source.src = audioSrc;
       this.$refs.playWav.load();
+
+      //1. 파일 확장자 알림 기능
       //파일명
       let fileName = uploadSound['name'];
       //파일의 확장자 추출
@@ -157,6 +152,8 @@ export default {
       (this.export = ""),
       (this.extract = "");
       (this.$refs.soundFileInput.value = '');
+      (this.$refs.source.src = '');
+      (this.$refs.playWav.load());
     },
   },
 };
@@ -184,6 +181,7 @@ export default {
 .inputTextBox,
 .outputTextBox {
   font-family: "NanumSquareRound";
+  font-size: 11pt;
   resize: none;
   width: 600px;
   height: 200px;

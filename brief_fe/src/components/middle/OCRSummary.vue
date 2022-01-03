@@ -14,9 +14,9 @@
             accept="image/*"
             @change="selectFile"
           />
-        </div>
-        <div class="img_wrap">
-          <img id = "img" />
+          <div>
+            <img id="preview" class="preview" />
+          </div>
         </div>
         <div class="arrowIcon">
           <font-awesome-icon icon="caret-down" />
@@ -37,25 +37,20 @@
           {{ this.export }}
         </p>
       </div>
-      <div v-else-if="extract === 'waiting'">
-        <textarea
-          class="outputTextBox"
-          readonly
-          placeholder="... 사진에서 텍스트를 추출하는 중입니다."
-        ></textarea>
+      <div v-else-if="extract === 'waiting'" class="outputTextBox">
+        <p style="color:#808080" align="justify">
+          {{"... 사진에서 텍스트를 추출하는 중입니다."}}
+        </p>
       </div>
-      <div v-else>
-        <textarea
-          class="outputTextBox"
-          readonly
-          placeholder="추출된 내용이 없습니다."
-        ></textarea>
+      <div v-else class="outputTextBox">
+        <p style="color:#808080" align="justify">
+          {{"추출된 내용이 없습니다."}}
+        </p>
       </div>
     </div>
     <div class="topIcon">
       <font-awesome-icon icon="caret-down" />
     </div>
-
     <b-button class="summaryBtn" @click="send">요약하기</b-button>
     <div class="bottomIcon">
       <font-awesome-icon icon="caret-down" />
@@ -70,20 +65,16 @@
             {{ this.output }}
           </p>
         </div>
-        <div v-else-if="show === 'waiting'">
-          <textarea
-            class="outputTextBox"
-            readonly
-            placeholder="... 입력된 내용을 요약하는 중입니다."
-          ></textarea>
-        </div>
-        <div v-else>
-          <textarea
-            class="outputTextBox"
-            readonly
-            placeholder="요약된 내용이 없습니다."
-          ></textarea>
-        </div>
+        <div v-else-if="show === 'waiting'" class="outputTextBox">
+        <p style="color:#808080" align="justify">
+          {{"... 입력된 내용을 요약하는 중입니다."}}
+        </p>
+      </div>
+      <div v-else class="outputTextBox">
+        <p style="color:#808080" align="justify">
+          {{"요약된 내용이 없습니다."}}
+        </p>
+      </div>
       </div>
     </div>
   </div>
@@ -109,7 +100,9 @@ export default {
     //사진선택
     selectFile(e) {
       const file = e.target.files[0];
-      //파일명
+      const imageSrc = window.URL.createObjectURL(file)
+      console.log(imageSrc)
+      //1. 파일 확장자 alert
       this.fileName = file['name'];
       //파일의 확장자 추출
       var fileDot = this.fileName.split('.').pop()
@@ -119,6 +112,10 @@ export default {
         alert(fileDot+' 파일은 업로드 하실 수 없습니다.');
         this.$refs.imageFileInput.value = '';
       }
+      //2. 파일 미리 보기
+      var reader = new FileReader();
+      document.getElementById('preview').src = imageSrc;
+      reader.readAsDataURL(e.target.files[0]);
     },
     //추출
     fileUpload() {
@@ -147,9 +144,11 @@ export default {
     reload() {
       (this.input = ""),
       (this.output = ""),
-      (this.extract = ""),
       (this.show = ""),
+      (this.export = ""),
+      (this.extract = "");
       (this.$refs.imageFileInput.value = '');
+      (document.getElementById('preview').src = '');
     },
     //요약
     send() {
@@ -167,10 +166,18 @@ export default {
 };
 </script>
 
+
 <style>
 .OCRSummary {
   height: 70%;
   margin-top: 3%;
+}
+.preview { 
+  width: 220px; 
+  height: auto;
+  max-width: 220px;
+  border:1px solid #eaeaea; 
+  padding: 0px; 
 }
 .imageFileInput {
   height: 45px;
@@ -188,6 +195,7 @@ export default {
 .inputTextBox,
 .outputTextBox {
   font-family: "NanumSquareRound";
+  font-size: 11pt;
   resize: none;
   width: 600px;
   height: 200px;
@@ -207,7 +215,7 @@ export default {
   border-color: rgb(81, 227, 204) !important;
   width: 125px;
   height: 35px;
-  border-radius: 8px;
+  border-radius: 8px !important;
 }
 .exportBtn:hover,
 .summaryBtn:hover {
