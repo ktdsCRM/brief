@@ -35,19 +35,15 @@
           {{ this.output }}
         </p>
       </div>
-      <div v-else-if="show === 'waiting'">
-        <textarea
-          class="outputTextBox"
-          readonly
-          placeholder="... 입력된 내용을 요약하는 중입니다."
-        ></textarea>
+      <div v-else-if="show === 'waiting'" class="outputTextBox">
+        <p style="color:#808080" align="justify">
+          {{"... 입력된 내용을 요약하는 중입니다."}}
+        </p>
       </div>
-      <div v-else>
-        <textarea
-          class="outputTextBox"
-          readonly
-          placeholder="요약된 내용이 없습니다."
-        ></textarea>
+      <div v-else class="outputTextBox">
+        <p style="color:#808080" align="justify">
+          {{"요약된 내용이 없습니다."}}
+        </p>
       </div>
     </div>
   </div>
@@ -113,6 +109,7 @@ export default {
 .inputTextBox,
 .outputTextBox {
   font-family: "NanumSquareRound";
+  font-size: 11pt;
   resize: none;
   width: 600px;
   height: 200px;
