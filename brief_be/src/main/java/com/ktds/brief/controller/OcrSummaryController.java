@@ -1,7 +1,7 @@
 package com.ktds.brief.controller;
 
-import java.io.File;
 
+import java.io.File;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.http.HttpStatus;
@@ -35,11 +35,10 @@ public class OcrSummaryController {
 		Object obj = parser.parse(text);
 		JSONObject j = (JSONObject)obj;
 		String input = (String) j.get("input");
-		String filename = (String) j.get("filename");
+		String fileName = (String) j.get("filename");
+		String type = "ocr";
+		String textRes = textSummaryService.getTextSum(input,type,fileName);
 
-		System.out.println("filename : "+filename);
-		
-		String textRes = textSummaryService.getTextSum(input);
 		return new ResponseEntity<>(textRes, HttpStatus.OK);	
 	}
 

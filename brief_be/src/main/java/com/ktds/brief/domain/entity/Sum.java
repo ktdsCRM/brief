@@ -15,12 +15,18 @@ public class Sum {
 	
 	private String text;
 	private String sumText;
+	private String type;
+	private String fileName;
+	private String createDate;
 	
 	@Builder
-	public Sum(String text, String sumText) {
+	public Sum(String text, String sumText, String type, String fileName, String createDate) {
 		
-		this.text = text;
+    this.text = text;
 		this.sumText = sumText;
+		this.type = type;
+		this.fileName = fileName;
+		this.createDate = createDate;
 	}
 	
 }

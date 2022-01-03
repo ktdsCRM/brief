@@ -27,15 +27,18 @@ public class SttSummaryController {
 
 	final private SttSummaryService sttSummaryService;
 	final private TextSummaryService textSummaryService; 
+	String fileName = "";
 	
 	//텍스트 추출
 	@RequestMapping(value = "/export", method = {RequestMethod.POST, RequestMethod.GET}, produces = "application/json; charset=utf-8")
 	public Object textSummary(@RequestParam("soundFile") MultipartFile multipartFiles) throws Exception{
+
 		String UPLOAD_PATH = "C://Users/82105/Desktop/soundFiles/";
 		String originalfileName = multipartFiles.getOriginalFilename();
 		String filePath = UPLOAD_PATH+originalfileName;
 		File dest = new File(filePath);//파일을 저장하기 위한 파일 객체 생성
 		multipartFiles.transferTo(dest);//파일 저장
+		fileName = originalfileName;
 		String sttRes = sttSummaryService.getSttSum(filePath);
 		return new ResponseEntity<>(sttRes, HttpStatus.OK);
 	}
@@ -47,9 +50,10 @@ public class SttSummaryController {
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(text);
 		JSONObject j = (JSONObject)obj;
-		String input = (String) j.get("input");		
-		String textRes = textSummaryService.getTextSum(input);
-		
+		String input = (String) j.get("input");
+		String type = "stt";
+		String textRes = textSummaryService.getTextSum(input, type, fileName);
+
 		return new ResponseEntity<>(textRes, HttpStatus.OK);
 	}
 

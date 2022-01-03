@@ -28,9 +28,10 @@ public class TextSummaryController {
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(text);
 		JSONObject j = (JSONObject)obj;
-		String input = (String) j.get("input");		
-		String textRes = textSummaryService.getTextSum(input);
-		
+		String input = (String) j.get("input");
+		String type = "text";
+		String textRes = textSummaryService.getTextSum(input, type, null);
+
 		return new ResponseEntity<>(textRes, HttpStatus.OK);
 	}
 
