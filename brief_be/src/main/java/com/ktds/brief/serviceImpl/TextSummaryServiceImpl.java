@@ -41,18 +41,12 @@ public class TextSummaryServiceImpl implements TextSummaryService {
 		ResponseEntity<String> res = restTemplate.postForEntity(url, parameters, String.class);
 
 		System.out.println(input);
-		System.out.println("res.getBody():"+res.getBody());
-		
-		//output data convert
-		//String inputResult = input.substring(9,input.length()-2);
-		//System.out.println("inputResult : "+inputResult);
+		System.out.println(res.getBody());
 		
 		//create date
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
-		Date time = new Date();
-		
+		Date time = new Date();		
 		String realTime = simpleDateFormat.format(time);
-		System.out.println("now time : "+realTime);
 
 		Sum entity = Sum.builder().text(input).sumText(res.getBody()).type(type).fileName(fileName).createDate(realTime).build();
 		sumMongoDBRepository.save(entity);

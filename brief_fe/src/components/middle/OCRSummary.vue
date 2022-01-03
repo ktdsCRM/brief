@@ -173,9 +173,10 @@ export default {
   margin-top: 3%;
 }
 .preview { 
-  width: 220px; 
+  width: 200px; 
   height: auto;
-  max-width: 220px;
+  max-width: 200px;
+  max-height: 200px;
   border:1px solid #eaeaea; 
   padding: 0px; 
 }
