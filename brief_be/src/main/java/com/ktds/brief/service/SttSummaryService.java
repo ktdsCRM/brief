@@ -2,6 +2,6 @@ package com.ktds.brief.service;
 
 public interface SttSummaryService {
 	
-	//stt 요약
+	//stt
 	public String getSttSum(String input) throws Exception;
 }

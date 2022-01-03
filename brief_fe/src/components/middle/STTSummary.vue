@@ -9,6 +9,7 @@
           <input
             type="file"
             class="soundFileInput"
+            ref="soundFileInput"
             id="soundFileInput"
             accept="audio/*"
             @change="onAudioSelected"
@@ -108,17 +109,25 @@ export default {
       const audioSrc = window.URL.createObjectURL(uploadSound);
       this.$refs.source.src = audioSrc;
       this.$refs.playWav.load();
+      //파일명
+      let fileName = uploadSound['name'];
+      //파일의 확장자 추출
+      var fileDot = fileName.split('.').pop()
+      //가능한 확장자
+      var dotArray = ["opus", "flac", "webm", "weba", "wav", "ogg", "m4a", "mp3", "oga", "mid", "amr", "aiff", "wma", "au", "aa"];
+      if(dotArray.includes(fileDot)==false){
+        alert(fileDot+' 파일은 업로드 하실 수 없습니다.');
+        this.$refs.soundFileInput.value = '';
+      }
     },
     //추출
     fileUpload() {
+      this.output = "",
+      this.show = "",
       this.extract = "waiting";
       var formData = new FormData();
       var soundFile = document.getElementById("soundFileInput");
-      console.log(soundFile);
       formData.append("soundFile", soundFile.files[0]);
-      for (var value of formData.values()) {
-        console.log(value);
-      }
       axios
         .post("http://localhost:9090/stt/export", formData, {
           headers: {
@@ -133,8 +142,8 @@ export default {
     send() {
       this.show = "waiting";
       http
-        .post("text/sum", {
-          input: this.export,
+        .post("stt/sum", {
+          input: this.export
         })
         .then((response) => {
           (this.show = "result"), (this.output = response.data);
@@ -143,10 +152,11 @@ export default {
     //새로고침
     reload() {
       (this.input = ""),
-        (this.output = ""),
-        (this.show = ""),
-        (this.export = ""),
-        (this.extract = "");
+      (this.output = ""),
+      (this.show = ""),
+      (this.export = ""),
+      (this.extract = "");
+      (this.$refs.soundFileInput.value = '');
     },
   },
 };

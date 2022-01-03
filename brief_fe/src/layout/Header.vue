@@ -1,9 +1,9 @@
 <template>
   <div>
     <b-navbar toggleable="lg" type="dark" variant="info">
-      <b-navbar-brand id="title" href="#" style="margin-left: 10%"
-        >BRIEF</b-navbar-brand
-      >
+      <b-navbar-brand id="title" href="#" style="margin-left: 10%">
+        <router-link to="/">BRIEF</router-link>
+      </b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>

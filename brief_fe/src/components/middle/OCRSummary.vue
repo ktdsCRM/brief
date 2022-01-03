@@ -15,6 +15,9 @@
             @change="selectFile"
           />
         </div>
+        <div class="img_wrap">
+          <img id = "img" />
+        </div>
         <div class="arrowIcon">
           <font-awesome-icon icon="caret-down" />
         </div>
@@ -62,27 +65,27 @@
         <p>요약된 내용</p>
       </div>
       <div>
-      <div v-if="show === 'result'" class="outputTextBox">
-        <p align="justify">
-          {{ this.output }}
-        </p>
-      </div>
-      <div v-else-if="show === 'waiting'">
-        <textarea
-          class="outputTextBox"
-          readonly
-          placeholder="... 입력된 내용을 요약하는 중입니다."
-        ></textarea>
-      </div>
-      <div v-else>
-        <textarea
-          class="outputTextBox"
-          readonly
-          placeholder="요약된 내용이 없습니다."
-        ></textarea>
+        <div v-if="show === 'result'" class="outputTextBox">
+          <p align="justify">
+            {{ this.output }}
+          </p>
+        </div>
+        <div v-else-if="show === 'waiting'">
+          <textarea
+            class="outputTextBox"
+            readonly
+            placeholder="... 입력된 내용을 요약하는 중입니다."
+          ></textarea>
+        </div>
+        <div v-else>
+          <textarea
+            class="outputTextBox"
+            readonly
+            placeholder="요약된 내용이 없습니다."
+          ></textarea>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -99,22 +102,28 @@ export default {
       show: "",
       export: "",
       extract: "",
+      fileName: "",
     };
   },
   methods: {
-    // onImageSelected() {
-    //   let image = this.$refs.imageFileInput.files[0];
-    //   this.formData = new FormData();
-    //   this.formData.append("image", image);
-    // },
     //사진선택
     selectFile(e) {
       const file = e.target.files[0];
-      this.image = URL.createObjectURL(file);
-      // console.log(process.env);
+      //파일명
+      this.fileName = file['name'];
+      //파일의 확장자 추출
+      var fileDot = this.fileName.split('.').pop()
+      //가능한 확장자
+      var dotArray = ["bmp", "dib", "jpeg", "jpg", "jpe", "jp2", "png", "webp", "pbm", "pgm", "ppm", "sr", "ras", "tiff", "tif"];
+      if(dotArray.includes(fileDot)==false){
+        alert(fileDot+' 파일은 업로드 하실 수 없습니다.');
+        this.$refs.imageFileInput.value = '';
+      }
     },
     //추출
     fileUpload() {
+      this.output = "",
+      this.show = "",
       this.extract = "waiting";
       let formData = new FormData();
       let imgFile = document.getElementById("imageFileInput");
@@ -127,32 +136,33 @@ export default {
           },
         })
         .then((response) => {
-          (this.extract = "result");
-          for (var i=0; i < response.data['result'].length; i++) {
-            this.export += response.data['result'][i]['recognition_words'][0]
+          this.export = "";
+          this.extract = "result";
+          for (var i = 0; i < response.data["result"].length; i++) {
+            this.export += response.data["result"][i]["recognition_words"][0];
           }
         });
     },
     //새로고침
     reload() {
       (this.input = ""),
-        (this.output = ""),
-        (this.extract = ""),
-        (this.show = "");
+      (this.output = ""),
+      (this.extract = ""),
+      (this.show = ""),
+      (this.$refs.imageFileInput.value = '');
     },
-
     //요약
     send() {
       this.show = "waiting";
       http
         .post("ocr/sum", {
           input: this.export,
+          filename: this.fileName
         })
         .then((response) => {
           (this.show = "result"), (this.output = response.data);
         });
     },
-
   },
 };
 </script>
@@ -186,6 +196,7 @@ export default {
   font-size: 11pt;
   margin: auto;
   border: 1px solid black;
+  overflow: scroll;
 }
 .exportBtn,
 .summaryBtn {

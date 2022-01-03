@@ -21,12 +21,12 @@ public class Sum {
 	
 	@Builder
 	public Sum(String text, String sumText, String type, String fileName, String createDate) {
-		this.text = text;
+		
+    this.text = text;
 		this.sumText = sumText;
 		this.type = type;
 		this.fileName = fileName;
 		this.createDate = createDate;
 	}
-
 	
 }
