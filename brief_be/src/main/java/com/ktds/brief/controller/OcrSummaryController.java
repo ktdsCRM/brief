@@ -1,5 +1,7 @@
 package com.ktds.brief.controller;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,12 +21,19 @@ import lombok.RequiredArgsConstructor;
 public class OcrSummaryController {
 	
 	final private TextSummaryService textSummaryService;
-
 	
 	//텍스트 요약
 	@RequestMapping(value = "/sum", method = {RequestMethod.POST, RequestMethod.GET}, produces = "application/json; charset=utf-8")
-	public Object textSummary(@RequestBody String input) throws Exception{
-		String textRes = textSummaryService.getTextSum(input);
+	public Object textSummary(@RequestBody String text) throws Exception{
+		
+		JSONParser parser = new JSONParser();
+		Object obj = parser.parse(text);
+		JSONObject j = (JSONObject)obj;
+		String input = (String) j.get("input");
+		String fileName = (String) j.get("filename");
+		String type = "ocr";
+		String textRes = textSummaryService.getTextSum(input,type,fileName);
+		
 		return new ResponseEntity<>(textRes, HttpStatus.OK);
 		
 	}

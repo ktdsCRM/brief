@@ -1,6 +1,8 @@
 package com.ktds.brief.serviceImpl;
 
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -25,7 +27,7 @@ public class TextSummaryServiceImpl implements TextSummaryService {
 	final private SumMongoDBRepository sumMongoDBRepository;
 	
 	@Override
-	public String getTextSum(String input) {
+	public String getTextSum(String input, String type, String fileName) {
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
 		
@@ -36,11 +38,23 @@ public class TextSummaryServiceImpl implements TextSummaryService {
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.getMessageConverters().add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
 
+		//input data
 		ResponseEntity<String> res = restTemplate.postForEntity(url, parameters, String.class);
 		System.out.println(input);
-		System.out.println(res.getBody());
+		System.out.println("res.getBody():"+res.getBody());
+		
+		//output data convert
+		//String inputResult = input.substring(9,input.length()-2);
+		//System.out.println("inputResult : "+inputResult);
+		
+		//create date
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
+		Date time = new Date();
+		
+		String realTime = simpleDateFormat.format(time);
+		System.out.println("now time : "+realTime);
 
-		Sum entity = Sum.builder().text(input).sumText(res.getBody()).build();
+		Sum entity = Sum.builder().text(input).sumText(res.getBody()).type(type).fileName(fileName).createDate(realTime).build();
 		sumMongoDBRepository.save(entity);
 		
 		return res.getBody();
