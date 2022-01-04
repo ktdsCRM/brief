@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import TextSummary from '@/components/middle/TextSummary.vue'
 import OCRSummary from '@/components/middle/OCRSummary.vue'
 import STTSummary from '@/components/middle/STTSummary.vue'
+import SumList from '@/components/middle/SumList.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/sttSummary',
     name: 'STTSummary',
     component: STTSummary,
+  },
+  {
+    path: '/sumList',
+    name: 'SumList',
+    component: SumList,
   }
 ]
 
