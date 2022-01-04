@@ -101,7 +101,6 @@ export default {
     selectFile(e) {
       const file = e.target.files[0];
       const imageSrc = window.URL.createObjectURL(file)
-      console.log(imageSrc)
       //1. 파일 확장자 alert
       this.fileName = file['name'];
       //파일의 확장자 추출
