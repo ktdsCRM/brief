@@ -190,6 +190,7 @@ export default {
 .exportBtn,
 .summaryBtn {
   font-family: "NanumSquareRound";
+  font-size: 12pt;
   color: #fff !important;
   border: none;
   background-color: rgb(81, 227, 204) !important;
