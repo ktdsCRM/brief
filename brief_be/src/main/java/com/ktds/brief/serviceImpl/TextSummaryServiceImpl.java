@@ -39,9 +39,6 @@ public class TextSummaryServiceImpl implements TextSummaryService {
 
 		//input data
 		ResponseEntity<String> res = restTemplate.postForEntity(url, parameters, String.class);
-
-		System.out.println(input);
-		System.out.println(res.getBody());
 		
 		//create date
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
