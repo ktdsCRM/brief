@@ -10,6 +10,10 @@
           <div class="sumTitle">
             <div id="sumTitleIcon">
               <font-awesome-icon :icon="['far', 'file-image']" size="2x" />
+              <!-- 
+                음성 아이콘   <font-awesome-icon :icon="['far', 'file-audio']" size="2x" />
+                텍스트 아이콘 <font-awesome-icon :icon="['fas', 'font']" size="2x" /> 
+              -->
             </div>
             <div id="sumTitleText">
               <p>파일이름</p>
@@ -57,6 +61,7 @@ export default {
   font-family: "NanumSquareRound";
   overflow: scroll;
 }
+
 .detail {
   float: right;
   height: 92vh;
