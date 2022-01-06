@@ -11,6 +11,7 @@
             <div id="sumTitleIcon">
               <font-awesome-icon :icon="['far', 'file-image']" size="2x" />
               <!-- 
+                현재 해야하는 것 : 왼쪽 사이드 연결~!, css 수정
                 음성 아이콘   <font-awesome-icon :icon="['far', 'file-audio']" size="2x" />
                 텍스트 아이콘 <font-awesome-icon :icon="['fas', 'font']" size="2x" /> 
               -->
