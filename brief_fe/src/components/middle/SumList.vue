@@ -33,6 +33,27 @@
     </div>
     <div class="right">
       <p>hello</p>
+      <div class="infoText">
+        <p class="summaryInfoText"><strong>추출된 텍스트</strong></p>
+      </div>
+      <textarea
+        class="inputTextBox"
+        id="input"
+        ref="input"
+        placeholder="추출된 텍스트를 입력해주세요."
+      ></textarea>
+      <div class="topIcon">
+      <font-awesome-icon icon="caret-down" />
+    </div>
+      <div class="infoText">
+        <p class="summaryInfoText"><strong>요약된 내용</strong></p>
+      </div>
+      <textarea
+        class="inputTextBox"
+        id="input"
+        ref="input"
+        placeholder="요약된 내용을 입력해주세요."
+      ></textarea>
     </div>
   </div>
 </template>
@@ -50,6 +71,10 @@ export default {
 </script>
 
 <style>
+.summaryInfoText {
+  width: 600px;
+  text-indent:20%;
+}
 .sumlist {
   height: 100%;
 }
@@ -60,11 +85,6 @@ export default {
   background-color: rgb(199, 235, 240);
   font-family: "NanumSquareRound";
   overflow: scroll;
-}
-
-.detail {
-  float: right;
-  height: 92vh;
 }
 #subTitle {
   text-align: left;
@@ -100,7 +120,8 @@ export default {
   float: right;
 }
 .right {
-  min-height: 92vh;
-  text-align: right !important;
+  float: right;
+  width: 70%;
+  height: 92vh;
 }
 </style>
