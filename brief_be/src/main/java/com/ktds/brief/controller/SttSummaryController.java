@@ -34,7 +34,6 @@ public class SttSummaryController {
 	public Object textSummary(@RequestParam("soundFile") MultipartFile multipartFiles) throws Exception{
 
 		String UPLOAD_PATH = "/Users/ohjihye/Desktop/soundFiles/";
-//		String UPLOAD_PATH = "C://Users/82103/Desktop/soundFiles/";
 		String originalfileName = multipartFiles.getOriginalFilename();
 		String filePath = UPLOAD_PATH+originalfileName;
 		File dest = new File(filePath);//파일을 저장하기 위한 파일 객체 생성
