@@ -8,6 +8,26 @@
       <div>
         <div class="item">
           <p>음<br />오<br />아<br />예<br /></p>
+        <div class="sumItem">
+          <div class="sumTitle">
+            <div id="sumTitleIcon">
+              <font-awesome-icon :icon="['far', 'file-image']" size="2x" />
+              <!-- 
+                현재 해야하는 것 : 왼쪽 사이드 연결~!, css 수정
+                음성 아이콘   <font-awesome-icon :icon="['far', 'file-audio']" size="2x" />
+                텍스트 아이콘 <font-awesome-icon :icon="['fas', 'font']" size="2x" /> 
+              -->
+            </div>
+            <div id="sumTitleText">
+              <p>파일이름</p>
+            </div>
+            <div id="sumTitleDate">
+              <p>2022.01.01</p>
+            </div>
+          </div>
+          <div>
+            <p>음<br />오<br />아<br />예<br /></p>
+          </div>
         </div>
         <div class="item">
           <p>음<br />오<br />아<br />예<br /></p>
