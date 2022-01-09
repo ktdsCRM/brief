@@ -1,79 +1,115 @@
 <template>
   <div class="sumList">
+    <!-- 왼쪽 기록 항목 -->
     <div class="list">
       <div id="subTitle">
         <p>요약 기록</p>
       </div>
       <hr />
-      <div>
-        <div class="sumItem">
-          <div class="sumTitle">
-            <div id="sumTitleIcon">
-              <font-awesome-icon :icon="['far', 'file-image']" size="2x" />
-              <!-- 
-                음성 아이콘   <font-awesome-icon :icon="['far', 'file-audio']" size="2x" />
-                텍스트 아이콘 <font-awesome-icon :icon="['fas', 'font']" size="2x" /> 
-              -->
-            </div>
-            <div id="sumTitleText">
-              <p>파일이름</p>
-            </div>
-            <div id="sumTitleDate">
-              <p>2022.01.01</p>
-            </div>
+      <!--  -->
+      <button v-for="(record, idx) in sendList" v-bind:key="idx" class="sumItem" id="sumItem" @click="boardSelect(record)">
+        <div class="sumTitle">
+          <div v-if="record.type === 'text'" id="sumTitleIcon">
+            <font-awesome-icon :icon="['far', 'file-image']" size="2x" style="vertical-align:middle;" />
+            <span><strong>&nbsp;&nbsp;Text</strong></span>
           </div>
-          <div>
-            <p>음<br />오<br />아<br />예<br /></p>
+          <div v-else-if="record.type === 'ocr'" id="sumTitleIcon">
+            <font-awesome-icon :icon="['fas', 'font']" size="2x" style="vertical-align:middle;" />
+            <span><strong>&nbsp;&nbsp;{{record.fileName}}</strong></span>
+          </div>
+          <div v-else id="sumTitleIcon">
+            <font-awesome-icon :icon="['far', 'file-audio']" size="2x" style="vertical-align:middle;" />
+            <span><strong>&nbsp;&nbsp;{{record.fileName}}</strong></span>
+          </div>
+          <div id="sumTitleDate">
+            <p>{{record.createDate}}</p>
           </div>
         </div>
-        <div class="sumItem">
-          <p>음<br />오<br />아<br />예<br /></p>
+        <div class="sumTitleSummary">
+          <p>{{record.sumText.substring(0,32) + "..."}}</p>
         </div>
-      </div>
+      </button>
     </div>
+
+    <!-- 오른쪽 내용 -->
     <div class="right">
-      <p>hello</p>
+      <div class="sumListHeader">
+        <div v-if="this.type === 'text'" id="sumListTitleIcon">
+          <font-awesome-icon :icon="['far', 'file-image']" size="3x" style="vertical-align:middle;"/>
+          <span> &nbsp;&nbsp;{{this.createDate}} </span>
+          <p> 원본파일명 : Text </p>
+        </div>
+        <div v-else-if="this.type === 'ocr'" id="sumListTitleIcon">
+          <font-awesome-icon :icon="['fas', 'font']" size="3x" style="vertical-align:middle;"/>
+          <span> &nbsp;&nbsp;{{this.createDate}} </span>
+          <p> 원본파일명 : {{this.fileName}} </p>
+        </div>
+        <div v-else id="sumListTitleIcon">
+          <font-awesome-icon :icon="['far', 'file-audio']" size="3x" style="vertical-align:middle;"/>
+          <span> &nbsp;&nbsp;{{this.createDate}} </span>
+          <p> 원본파일명 : {{this.fileName}} </p>
+        </div>
+      </div>  
+
       <div class="infoText">
         <p class="summaryInfoText"><strong>추출된 텍스트</strong></p>
       </div>
-      <textarea
-        class="inputTextBox"
-        id="input"
-        ref="input"
-        placeholder="추출된 텍스트를 입력해주세요."
-      ></textarea>
-      <div class="topIcon">
+      <p class="inputTextBox" id="input" ref="input">
+        {{this.text}}
+      </p>
+      <div></div>
+      <div class="topIcon" style="float:center">
+      
       <font-awesome-icon icon="caret-down" />
     </div>
       <div class="infoText">
-        <p class="summaryInfoText"><strong>요약된 내용</strong></p>
+        <p class="summaryInfoText"><strong>요약된 텍스트</strong></p>
       </div>
-      <textarea
-        class="inputTextBox"
-        id="input"
-        ref="input"
-        placeholder="요약된 내용을 입력해주세요."
-      ></textarea>
+      <p class="inputTextBox" id="input" ref="input">
+        {{this.sumText}}
+      </p>
     </div>
   </div>
 </template>
 
+
 <script>
 import "@/fontAwesomeIcon.js";
+import http from "@/utils/http-common";
 
 export default {
-  data: function () {
+  data() {
     return {
-      sumData: [],
-    };
+      sendList: '',
+      text:'',
+      sumText:'',
+      type:'',
+      fileName:'',
+      createDate:'',
+    }
   },
+  mounted(){
+    http
+      .get("board/info")
+      .then(response => (this.sendList = response.data));
+  },
+  methods: {
+    boardSelect(index) {
+      this.text = index.text;
+      this.sumText = index.sumText;
+      this.type = index.type;
+      this.fileName = index.fileName;
+      this.createDate = index.createDate;
+    }
+  }
 };
 </script>
 
 <style>
 .summaryInfoText {
-  width: 600px;
-  text-indent:20%;
+  text-align:center;
+  /* width: 600px; */
+  /* text-indent:20%; */
 }
 .sumlist {
   height: 100%;
@@ -99,29 +135,50 @@ export default {
   border: 1px solid white;
   border-radius: 8px;
   background-color: white;
-  margin: 10px;
+  margin: 10px 10px 3px 10px;
   padding: 5px;
+  height : 100px;
+  width : 92% ;
+}
+.sumItem:hover {
+  border-color: rgb(90, 216, 197);
+  border: 5px solid rgb(90, 216, 197);
+  margin: 6.5px;
+  border-radius:10px;
 }
 .sumTitle {
-  margin: 7pt 10pt 0 10pt;
+  margin: 6pt 10pt 2pt 10pt;
+  height: 25pt;
+  align-items: flex-start;
 }
 #sumTitleIcon {
   float: left;
   vertical-align: middle;
 }
-#sumTitleText {
-  /* display: inline-block; */
-  float: left;
-  vertical-align: middle;
-  margin-left: 10pt;
-}
 #sumTitleDate {
   vertical-align: middle;
   float: right;
+  font-size:10pt;
+}
+.sumTitleSummary{
+  margin: 6pt 10pt 4pt 10pt;
+  height: 50px;
+  align-items: flex-end;
+  font-size: 12pt;
+  text-align: left;
 }
 .right {
   float: right;
   width: 70%;
   height: 92vh;
 }
+.sumListHeader{
+  margin: 5% 0px 0px 20%;
+  text-align: left;
+}
+#sumListTitleIcon {
+  float: center;
+  vertical-align: middle;
+}
+
 </style>
