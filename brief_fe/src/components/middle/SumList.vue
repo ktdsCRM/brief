@@ -6,12 +6,10 @@
         <p>요약 기록</p>
       </div>
       <hr />
-      <!--  -->
       <button v-for="(record, idx) in sendList" v-bind:key="idx" class="sumItem" id="sumItem" @click="boardSelect(record)">
         <div class="sumTitle">
           <div v-if="record.type === 'text'" id="sumTitleIcon">
             <font-awesome-icon :icon="['far', 'file-image']" size="2x" style="vertical-align:middle;" />
-            <span><strong>&nbsp;&nbsp;Text</strong></span>
           </div>
           <div v-else-if="record.type === 'ocr'" id="sumTitleIcon">
             <font-awesome-icon :icon="['fas', 'font']" size="2x" style="vertical-align:middle;" />
@@ -35,22 +33,25 @@
     <div class="right">
       <div class="sumListHeader">
         <div v-if="this.type === 'text'" id="sumListTitleIcon">
-          <font-awesome-icon :icon="['far', 'file-image']" size="3x" style="vertical-align:middle;"/>
-          <span> &nbsp;&nbsp;{{this.createDate}} </span>
-          <p> 원본파일명 : Text </p>
+          <font-awesome-icon :icon="['far', 'file-image']" size="3x" style="vertical-align:text-middle; max-width:60px"/>
+          <span> &nbsp;&nbsp;&nbsp;기록 날짜 <br> &nbsp;&nbsp;&nbsp;{{this.createDate}} </span>
         </div>
         <div v-else-if="this.type === 'ocr'" id="sumListTitleIcon">
-          <font-awesome-icon :icon="['fas', 'font']" size="3x" style="vertical-align:middle;"/>
-          <span> &nbsp;&nbsp;{{this.createDate}} </span>
-          <p> 원본파일명 : {{this.fileName}} </p>
+          <font-awesome-icon :icon="['fas', 'font']" size="3x" style="vertical-align:text-middle; max-width:60px"/>
+          <span> &nbsp;&nbsp;&nbsp;기록 날짜 <br> &nbsp;&nbsp;&nbsp;{{this.createDate}} </span>
         </div>
         <div v-else id="sumListTitleIcon">
-          <font-awesome-icon :icon="['far', 'file-audio']" size="3x" style="vertical-align:middle;"/>
-          <span> &nbsp;&nbsp;{{this.createDate}} </span>
-          <p> 원본파일명 : {{this.fileName}} </p>
+          <font-awesome-icon :icon="['far', 'file-audio']" size="3x" style="vertical-align:text-middle; max-width:60px"/>
+          <span> &nbsp;&nbsp;&nbsp;기록 날짜 <br> &nbsp;&nbsp;&nbsp;{{this.createDate}} </span>
         </div>
-      </div>  
-
+      </div>
+      <div v-if="this.type === 'text'" class="sumListMiddle">
+        <p class="summaryInfoText"></p>
+      </div>
+      <div v-else class="sumListMiddle">
+        <p class="summaryInfoText">
+          <strong>원본 파일명 : {{this.fileName}}</strong></p>
+      </div>
       <div class="infoText">
         <p class="summaryInfoText"><strong>추출된 텍스트</strong></p>
       </div>
@@ -107,9 +108,9 @@ export default {
 
 <style>
 .summaryInfoText {
-  text-align:center;
-  /* width: 600px; */
-  /* text-indent:20%; */
+  font-size: 13pt;
+  text-align: left;
+  margin-left: 25%;
 }
 .sumlist {
   height: 100%;
@@ -173,12 +174,15 @@ export default {
   height: 92vh;
 }
 .sumListHeader{
-  margin: 5% 0px 0px 20%;
+  margin: 5% 0px 0px 25%;
   text-align: left;
 }
 #sumListTitleIcon {
   float: center;
-  vertical-align: middle;
+  display: flex !important;
 }
-
+.sumListMiddle{
+  margin-top: 3%;
+  margin-bottom: 3%;
+}
 </style>
