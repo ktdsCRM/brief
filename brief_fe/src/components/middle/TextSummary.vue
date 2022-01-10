@@ -2,7 +2,10 @@
   <div class="TextSummary">
     <div class="inputText">
       <div class="infoText">
-        <p>요약할 원문을 하단에 입력해주세요.</p>
+        <font-awesome-icon :icon="['far', 'file-audio']" size="2x" style="vertical-align:middle;" />
+        <span>&nbsp;&nbsp;요약할 원문을 하단에 입력해주세요.</span>
+      </div>
+      <div>
         <button class="refreshBtn" @click="reload">
           <i class="refreshIcon">
             <font-awesome-icon icon="sync-alt" />
@@ -118,6 +121,7 @@ export default {
   font-size: 11pt;
   margin: auto;
   border: 1px solid black;
+  text-align: left;
 }
 .summaryBtn {
   font-family: "NanumSquareRound";

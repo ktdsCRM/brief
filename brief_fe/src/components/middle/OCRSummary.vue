@@ -3,7 +3,8 @@
     <div class="inputText">
       <div>
         <div class="infoText">
-          <p>사진 파일을 첨부해주세요.</p>
+          <font-awesome-icon :icon="['far', 'file-audio']" size="2x" style="vertical-align:middle;" />
+          <span>&nbsp;&nbsp;사진 파일을 첨부해주세요.</span>
         </div>
         <div>
           <input

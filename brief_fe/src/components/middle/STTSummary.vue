@@ -3,7 +3,9 @@
     <div class="inputText">
       <div>
         <div class="infoText">
-          <p>음성 파일을 첨부해주세요.</p>
+          <font-awesome-icon :icon="['far', 'file-audio']" size="2x" style="vertical-align:middle;" />
+          <span>&nbsp;&nbsp;음성 파일을 첨부해주세요.</span>
+          <br>
         </div>
         <div>
           <input
@@ -177,6 +179,7 @@ export default {
 }
 .infoText {
   font-size: 13pt;
+  margin-bottom: 10px;
 }
 .inputTextBox,
 .outputTextBox {

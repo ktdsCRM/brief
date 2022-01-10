@@ -26,7 +26,7 @@
           </div>
         </div>
         <div class="sumTitleSummary">
-          <p>{{record.sumText.substring(0,32) + "..."}}</p>
+          <p>{{record.sumText.substring(0,31) + "..."}}</p>
         </div>
       </button>
     </div>
