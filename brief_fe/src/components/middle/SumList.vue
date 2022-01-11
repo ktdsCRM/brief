@@ -9,14 +9,14 @@
       <button v-for="(record, idx) in sendList" v-bind:key="idx" class="sumItem" id="sumItem" @click="boardSelect(record)">
         <div class="sumTitle">
           <div v-if="record.type === 'text'" id="sumTitleIcon">
-            <font-awesome-icon :icon="['far', 'file-image']" size="2x" style="vertical-align:middle;" />
+            <font-awesome-icon :icon="['fas', 'font']" size="2x" style="vertical-align:middle;" />
           </div>
           <div v-else-if="record.type === 'ocr'" id="sumTitleIcon">
-            <font-awesome-icon :icon="['fas', 'font']" size="2x" style="vertical-align:middle;" />
+            <font-awesome-icon :icon="['fas', 'file-image']" size="2x" style="vertical-align:middle;" />
             <span><strong>&nbsp;&nbsp;{{record.fileName}}</strong></span>
           </div>
           <div v-else id="sumTitleIcon">
-            <font-awesome-icon :icon="['far', 'file-audio']" size="2x" style="vertical-align:middle;" />
+            <font-awesome-icon :icon="['fas', 'volume-down']" size="2x" style="vertical-align:middle;" />
             <span><strong>&nbsp;&nbsp;{{record.fileName}}</strong></span>
           </div>
           <div id="sumTitleDate">
@@ -33,15 +33,15 @@
     <div class="right">
       <div class="sumListHeader">
         <div v-if="this.type === 'text'" id="sumListTitleIcon">
-          <font-awesome-icon :icon="['far', 'file-image']" size="3x" style="vertical-align:text-middle; max-width:60px"/>
-          <span> &nbsp;&nbsp;&nbsp;기록 날짜 <br> &nbsp;&nbsp;&nbsp;{{this.createDate}} </span>
-        </div>
-        <div v-else-if="this.type === 'ocr'" id="sumListTitleIcon">
           <font-awesome-icon :icon="['fas', 'font']" size="3x" style="vertical-align:text-middle; max-width:60px"/>
           <span> &nbsp;&nbsp;&nbsp;기록 날짜 <br> &nbsp;&nbsp;&nbsp;{{this.createDate}} </span>
         </div>
+        <div v-else-if="this.type === 'ocr'" id="sumListTitleIcon">
+          <font-awesome-icon :icon="['fas', 'file-image']" size="3x" style="vertical-align:text-middle; max-width:60px"/>
+          <span> &nbsp;&nbsp;&nbsp;기록 날짜 <br> &nbsp;&nbsp;&nbsp;{{this.createDate}} </span>
+        </div>
         <div v-else id="sumListTitleIcon">
-          <font-awesome-icon :icon="['far', 'file-audio']" size="3x" style="vertical-align:text-middle; max-width:60px"/>
+          <font-awesome-icon :icon="['fas', 'volume-down']" size="3x" style="vertical-align:text-middle; max-width:60px"/>
           <span> &nbsp;&nbsp;&nbsp;기록 날짜 <br> &nbsp;&nbsp;&nbsp;{{this.createDate}} </span>
         </div>
       </div>

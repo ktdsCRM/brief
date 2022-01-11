@@ -2,7 +2,7 @@
   <div class="TextSummary">
     <div class="inputText">
       <div class="infoText">
-        <font-awesome-icon :icon="['far', 'file-audio']" size="2x" style="vertical-align:middle;" />
+        <font-awesome-icon :icon="['fas', 'font']" size="2x" style="vertical-align:middle;" />
         <span>&nbsp;&nbsp;요약할 원문을 하단에 입력해주세요.</span>
       </div>
       <div>

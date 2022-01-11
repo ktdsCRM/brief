@@ -3,7 +3,7 @@
     <div class="inputText">
       <div>
         <div class="infoText">
-          <font-awesome-icon :icon="['far', 'file-audio']" size="2x" style="vertical-align:middle;" />
+          <font-awesome-icon :icon="['fas', 'file-image']" size="2x" style="vertical-align:middle;" />
           <span>&nbsp;&nbsp;사진 파일을 첨부해주세요.</span>
         </div>
         <div>
@@ -52,7 +52,7 @@
     <div class="topIcon">
       <font-awesome-icon icon="caret-down" />
     </div>
-    <b-button class="summaryBtn" @click="send">요약하기</b-button>
+    <b-button class="summaryBtn" @click="check">요약하기</b-button>
     <div class="bottomIcon">
       <font-awesome-icon icon="caret-down" />
     </div>
@@ -121,11 +121,14 @@ export default {
     //추출
     fileUpload() {
       this.output = "",
-      this.show = "",
-      this.extract = "waiting";
+      this.show = "";
       let formData = new FormData();
       let imgFile = document.getElementById("imageFileInput");
-      formData.append("image", imgFile.files[0]);
+      if(imgFile.files[0]===undefined){
+        alert("파일을 첨부해주세요.");
+      }else{
+        this.extract = "waiting";
+        formData.append("image", imgFile.files[0]);
       axios
         .post(`${SERVER.ROUTES.OCR}`, formData, {
           headers: {
@@ -140,6 +143,7 @@ export default {
             this.export += response.data["result"][i]["recognition_words"][0];
           }
         });
+      }
     },
     //새로고침
     reload() {
@@ -151,9 +155,19 @@ export default {
       (this.$refs.imageFileInput.value = '');
       (document.getElementById('preview').src = '');
     },
+
+    check() {
+      let err = true;
+      let msg = "";
+      err && !this.export && (
+        (msg = "추출하기를 먼저 진행해주세요."),
+        (err = false)
+      );
+      if(!err) alert(msg);
+      else(this.show = "waiting"), this.send();
+    },
     //요약
     send() {
-      this.show = "waiting";
       http
         .post("ocr/sum", {
           input: this.export,

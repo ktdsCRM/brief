@@ -3,7 +3,7 @@
     <div class="inputText">
       <div>
         <div class="infoText">
-          <font-awesome-icon :icon="['far', 'file-audio']" size="2x" style="vertical-align:middle;" />
+          <font-awesome-icon :icon="['fas', 'volume-down']" size="2x" style="vertical-align:middle;" />
           <span>&nbsp;&nbsp;음성 파일을 첨부해주세요.</span>
           <br>
         </div>
@@ -55,7 +55,7 @@
     <div class="topIcon">
       <font-awesome-icon icon="caret-down" />
     </div>
-    <button class="summaryBtn" @click="send">요약하기</button>
+    <button class="summaryBtn" @click="check">요약하기</button>
     <div class="bottomIcon">
       <font-awesome-icon icon="caret-down" />
     </div>
@@ -120,11 +120,14 @@ export default {
     //추출
     fileUpload() {
       this.output = "",
-      this.show = "",
-      this.extract = "waiting";
+      this.show = "";
       var formData = new FormData();
       var soundFile = document.getElementById("soundFileInput");
-      formData.append("soundFile", soundFile.files[0]);
+      if(soundFile.files[0]===undefined){
+        alert("파일을 첨부해주세요.")
+      }else{
+        this.extract = "waiting";
+        formData.append("soundFile", soundFile.files[0]);
       axios
         .post("http://localhost:9090/stt/export", formData, {
           headers: {
@@ -134,10 +137,21 @@ export default {
         .then((response) => {
           (this.export = response.data), (this.extract = "result");
         });
+      }
+    },
+    //입력체크
+    check() {
+      let err = true;
+      let msg = "";
+      err && !this.export && (
+        (msg = "추출하기를 먼저 진행해주세요."),
+        (err = false)
+      );
+      if(!err) alert(msg);
+      else(this.show = "waiting"), this.send();
     },
     //요약
     send() {
-      this.show = "waiting";
       http
         .post("stt/sum", {
           input: this.export
