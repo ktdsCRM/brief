@@ -51,6 +51,9 @@
           {{"추출된 내용이 없습니다."}}
         </p>
       </div>
+      <div class="sentenceLength" style="margin-top:4pt;">
+        <span v-if="extract === 'result'"> {{ this.export.length }}자 </span>
+      </div>
     </div>
     <div class="topIcon">
       <font-awesome-icon icon="caret-down" />
@@ -77,6 +80,9 @@
         <p style="color:#808080" align="justify">
           {{"요약된 내용이 없습니다."}}
         </p>
+      </div>
+      <div class="sentenceLength" style="margin-top:4pt;">
+        <span v-if="show === 'result'"> {{ this.output.length }}자 </span>
       </div>
     </div>
   </div>

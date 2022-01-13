@@ -21,6 +21,9 @@
           placeholder="텍스트를 입력해주세요."
         ></textarea>
       </div>
+      <div class="sentenceLength">
+        <span v-if="show === 'result'"> {{ this.input.length }}자 </span>
+      </div>
     </div>
     <div class="topIcon">
       <font-awesome-icon icon="caret-down" />
@@ -47,6 +50,9 @@
         <p style="color:#808080" align="justify">
           {{"요약된 내용이 없습니다."}}
         </p>
+      </div>
+      <div class="sentenceLength" style="margin-top:4pt;">
+        <span v-if="show === 'result'"> {{ this.output.length }}자 </span>
       </div>
     </div>
   </div>
@@ -150,7 +156,13 @@ export default {
 .refreshIcon {
   color: #51e3cc;
 }
-
+.sentenceLength{
+  border: none;
+  background-color: transparent;
+  margin-left: 550px;
+  font-size: 10pt;
+  height: 0pt;
+}
 @import url(//fonts.googleapis.com/earlyaccess/jejumyeongjo.css);
 
 @font-face {

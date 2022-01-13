@@ -9,14 +9,14 @@
       <button v-for="(record, idx) in sendList" v-bind:key="idx" class="sumItem" id="sumItem" @click="boardSelect(record)">
         <div class="sumTitle">
           <div v-if="record.type === 'text'" id="sumTitleIcon">
-            <font-awesome-icon :icon="['fas', 'font']" size="2x" style="vertical-align:middle;" />
+            <font-awesome-icon :icon="['far', 'file-image']" size="2x" style="vertical-align:middle;" />
           </div>
           <div v-else-if="record.type === 'ocr'" id="sumTitleIcon">
-            <font-awesome-icon :icon="['fas', 'file-image']" size="2x" style="vertical-align:middle;" />
+            <font-awesome-icon :icon="['fas', 'font']" size="2x" style="vertical-align:middle;" />
             <span><strong>&nbsp;&nbsp;{{record.fileName}}</strong></span>
           </div>
           <div v-else id="sumTitleIcon">
-            <font-awesome-icon :icon="['fas', 'volume-down']" size="2x" style="vertical-align:middle;" />
+            <font-awesome-icon :icon="['far', 'file-audio']" size="2x" style="vertical-align:middle;" />
             <span><strong>&nbsp;&nbsp;{{record.fileName}}</strong></span>
           </div>
           <div id="sumTitleDate">
@@ -33,15 +33,15 @@
     <div class="right">
       <div class="sumListHeader">
         <div v-if="this.type === 'text'" id="sumListTitleIcon">
-          <font-awesome-icon :icon="['fas', 'font']" size="3x" style="vertical-align:text-middle; max-width:60px"/>
+          <font-awesome-icon :icon="['far', 'file-image']" size="3x" style="vertical-align:text-middle; max-width:60px"/>
           <span> &nbsp;&nbsp;&nbsp;기록 날짜 <br> &nbsp;&nbsp;&nbsp;{{this.createDate}} </span>
         </div>
         <div v-else-if="this.type === 'ocr'" id="sumListTitleIcon">
-          <font-awesome-icon :icon="['fas', 'file-image']" size="3x" style="vertical-align:text-middle; max-width:60px"/>
+          <font-awesome-icon :icon="['fas', 'font']" size="3x" style="vertical-align:text-middle; max-width:60px"/>
           <span> &nbsp;&nbsp;&nbsp;기록 날짜 <br> &nbsp;&nbsp;&nbsp;{{this.createDate}} </span>
         </div>
         <div v-else id="sumListTitleIcon">
-          <font-awesome-icon :icon="['fas', 'volume-down']" size="3x" style="vertical-align:text-middle; max-width:60px"/>
+          <font-awesome-icon :icon="['far', 'file-audio']" size="3x" style="vertical-align:text-middle; max-width:60px"/>
           <span> &nbsp;&nbsp;&nbsp;기록 날짜 <br> &nbsp;&nbsp;&nbsp;{{this.createDate}} </span>
         </div>
       </div>
@@ -58,17 +58,22 @@
       <p class="inputTextBox" id="input" ref="input">
         {{this.text}}
       </p>
-      <div></div>
+      <div class="sentenceLength" style="margin-top:4pt;">
+        <span> {{ this.text.length }}자 </span>
+      </div>
+      <!-- <div></div> -->
       <div class="topIcon" style="float:center">
-      
-      <font-awesome-icon icon="caret-down" />
-    </div>
+        <font-awesome-icon icon="caret-down" />
+      </div>
       <div class="infoText">
         <p class="summaryInfoText"><strong>요약된 텍스트</strong></p>
       </div>
       <p class="inputTextBox" id="input" ref="input">
         {{this.sumText}}
       </p>
+      <div class="sentenceLength" style="margin-top:4pt;">
+        <span> {{ this.sumText.length }}자 </span>
+      </div>
     </div>
   </div>
 </template>
@@ -118,7 +123,7 @@ export default {
 .list {
   float: left;
   width: 30%;
-  min-height: 92vh;
+  height: 92vh;
   background-color: rgb(199, 235, 240);
   font-family: "NanumSquareRound";
   overflow: scroll;
@@ -136,9 +141,11 @@ export default {
   border: 1px solid white;
   border-radius: 8px;
   background-color: white;
-  margin: 10px 10px 3px 10px;
+  margin: 10px 5px 3px 10px;
+  /* 10px 5px 10px 10px; */
   padding: 5px;
-  height : 100px;
+  height : 100px; 
+  /* auto; */
   width : 92% ;
 }
 .sumItem:hover {

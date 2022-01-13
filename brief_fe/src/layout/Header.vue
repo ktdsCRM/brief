@@ -21,6 +21,14 @@
             ><router-link to="/sumList">기록</router-link></b-nav-item
           >
         </b-navbar-nav>
+        <div class='rightTop'>
+          <div class='userImg'>
+            <img class="rightImogi" src="../assets/오지혜.png" alt="jihye" width="50" height="50">
+            <img class="rightImogi" src="../assets/조안나.png" alt="jihye" width="50" height="50">
+            <img class="rightImogi" src="../assets/조안나.png" alt="jihye" width="50" height="50">
+          </div>
+          <p class='userWord'>혼자서는 작은 일도 어렵지만, 함께라면 많은 것을 할 수 있어요</p>
+        </div>
       </b-collapse>
     </b-navbar>
   </div>
@@ -35,6 +43,22 @@ export default {
 </script>
 
 <style>
+.rightTop{
+  margin-left:35%;
+}
+.userImg {
+  text-align: left;
+}
+.rightImogi{
+  border-radius:50%;
+  margin: 0 5px;
+  max-width:50;
+}
+.userWord{
+  margin-top:2pt;
+  font-size:3pt;
+  height:3pt;
+}
 #title {
   font-family: "SDSamliphopangche_Outline";
   font-size: 23pt;

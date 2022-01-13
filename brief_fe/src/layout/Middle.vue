@@ -11,6 +11,6 @@
 .midText {
   text-align: center;
   align-items: center;
-  margin: 0 auto;
+  padding-bottom: 5%;
 }
 </style>
