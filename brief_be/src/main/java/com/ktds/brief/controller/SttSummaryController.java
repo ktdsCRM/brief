@@ -33,7 +33,8 @@ public class SttSummaryController {
 	@RequestMapping(value = "/export", method = {RequestMethod.POST, RequestMethod.GET}, produces = "application/json; charset=utf-8")
 	public Object textSummary(@RequestParam("soundFile") MultipartFile multipartFiles) throws Exception{
 
-		String UPLOAD_PATH = "C:/Users/82105/Storage/Project/Brief/soundFiles/";
+//		String UPLOAD_PATH = "C:/Users/82105/Storage/Project/Brief/soundFiles/";
+		String UPLOAD_PATH = "C:/Users/82103/Desktop/soundFiles";		
 		String originalfileName = multipartFiles.getOriginalFilename();
 		String filePath = UPLOAD_PATH+originalfileName;
 		File dest = new File(filePath);//파일을 저장하기 위한 파일 객체 생성
