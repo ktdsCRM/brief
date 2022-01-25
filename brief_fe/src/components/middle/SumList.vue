@@ -163,6 +163,8 @@ export default {
       this.type = index.type;
       this.fileName = index.fileName;
       this.createDate = index.createDate;
+      this.basic = false;
+      this.detail = true;
     },
   },
 };
