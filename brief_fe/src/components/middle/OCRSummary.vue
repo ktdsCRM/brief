@@ -3,7 +3,7 @@
     <div class="inputText">
       <div>
         <div class="infoText">
-          <font-awesome-icon :icon="['fas', 'file-image']" size="2x" style="vertical-align:middle;" />
+          <font-awesome-icon :icon="['far', 'file-image']" size="2x" style="vertical-align:middle;" />
           <span>&nbsp;&nbsp;사진 파일을 첨부해주세요.</span>
         </div>
         <div>

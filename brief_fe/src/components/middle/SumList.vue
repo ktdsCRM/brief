@@ -16,7 +16,7 @@
             <span><strong>&nbsp;&nbsp;{{record.fileName}}</strong></span>
           </div>
           <div v-else id="sumTitleIcon">
-            <font-awesome-icon :icon="['far', 'file-audio']" size="2x" style="vertical-align:middle;" />
+            <font-awesome-icon :icon="['fas', 'volume-down']" size="2x" style="vertical-align:middle;" />
             <span><strong>&nbsp;&nbsp;{{record.fileName}}</strong></span>
           </div>
           <div id="sumTitleDate">
@@ -41,7 +41,7 @@
           <span> &nbsp;&nbsp;&nbsp;기록 날짜 <br> &nbsp;&nbsp;&nbsp;{{this.createDate}} </span>
         </div>
         <div v-else id="sumListTitleIcon">
-          <font-awesome-icon :icon="['far', 'file-audio']" size="3x" style="vertical-align:text-middle; max-width:60px"/>
+          <font-awesome-icon :icon="['fas', 'volume-down']" size="3x" style="vertical-align:text-middle; max-width:60px"/>
           <span> &nbsp;&nbsp;&nbsp;기록 날짜 <br> &nbsp;&nbsp;&nbsp;{{this.createDate}} </span>
         </div>
       </div>
