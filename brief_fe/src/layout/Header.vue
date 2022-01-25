@@ -23,8 +23,8 @@
         </b-navbar-nav>
         <div class='rightTop'>
           <div class='userImg'>
+            <img class="rightImogi" src="../assets/박세진.png" alt="jihye" width="50" height="50">
             <img class="rightImogi" src="../assets/오지혜.png" alt="jihye" width="50" height="50">
-            <img class="rightImogi" src="../assets/조안나.png" alt="jihye" width="50" height="50">
             <img class="rightImogi" src="../assets/조안나.png" alt="jihye" width="50" height="50">
           </div>
           <p class='userWord'>혼자서는 작은 일도 어렵지만, 함께라면 많은 것을 할 수 있어요</p>
