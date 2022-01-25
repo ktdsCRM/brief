@@ -52,7 +52,7 @@
     </div>
 
     <!-- 오른쪽 기본 -->
-    <div class="right-main">
+    <div v-show="basic" class="right-main">
       <div class="rightss">
         <div id="right-main-smile"><b>:)</b><br /></div>
         <div id="right-main-text">
@@ -65,7 +65,7 @@
     </div>
 
     <!-- 오른쪽 내용 -->
-    <!-- <div class="right">
+    <div v-show="detail" class="right">
       <div class="sumListHeader">
         <div v-if="this.type === 'text'" id="sumListTitleIcon">
           <font-awesome-icon
@@ -125,7 +125,7 @@
       <p class="inputTextBox" id="input" ref="input">
         {{ this.sumText }}
       </p>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -143,6 +143,8 @@ export default {
       type: "",
       fileName: "",
       createDate: "",
+      basic: true,
+      detail: false,
     };
   },
   mounted() {
