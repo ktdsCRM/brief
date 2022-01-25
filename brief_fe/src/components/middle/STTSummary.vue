@@ -3,10 +3,15 @@
     <div class="inputText">
       <div>
         <div class="infoText">
-          <font-awesome-icon :icon="['fas', 'volume-down']" size="2x" style="vertical-align:middle;" />
+          <font-awesome-icon
+            :icon="['fas', 'volume-down']"
+            size="2x"
+            style="vertical-align: middle"
+          />
           <span>&nbsp;&nbsp;음성 파일을 첨부해주세요.</span>
-          <br>
+          <br />
         </div>
+        <div class="typeInfo">* 재생시간 30초 / 1MB 이하만 가능합니다.</div>
         <div>
           <input
             type="file"
@@ -42,16 +47,16 @@
         </p>
       </div>
       <div v-else-if="extract === 'waiting'" class="outputTextBox">
-        <p style="color:#808080" align="justify">
-          {{"... 음성에서 텍스트를 추출하는 중입니다."}}
+        <p style="color: #808080" align="justify">
+          {{ "... 음성에서 텍스트를 추출하는 중입니다." }}
         </p>
       </div>
       <div v-else class="outputTextBox">
-        <p style="color:#808080" align="justify">
-          {{"추출된 내용이 없습니다."}}
+        <p style="color: #808080" align="justify">
+          {{ "추출된 내용이 없습니다." }}
         </p>
       </div>
-      <div class="sentenceLength" style="margin-top:4pt;">
+      <div class="sentenceLength" style="margin-top: 4pt">
         <span v-if="extract === 'result'"> {{ this.export.length }}자 </span>
       </div>
     </div>
@@ -72,16 +77,16 @@
         </p>
       </div>
       <div v-else-if="show === 'waiting'" class="outputTextBox">
-        <p style="color:#808080" align="justify">
-          {{"... 입력된 내용을 요약하는 중입니다."}}
+        <p style="color: #808080" align="justify">
+          {{ "... 입력된 내용을 요약하는 중입니다." }}
         </p>
       </div>
       <div v-else class="outputTextBox">
-        <p style="color:#808080" align="justify">
-          {{"요약된 내용이 없습니다."}}
+        <p style="color: #808080" align="justify">
+          {{ "요약된 내용이 없습니다." }}
         </p>
       </div>
-      <div class="sentenceLength" style="margin-top:4pt;">
+      <div class="sentenceLength" style="margin-top: 4pt">
         <span v-if="show === 'result'"> {{ this.output.length }}자 </span>
       </div>
     </div>
@@ -113,54 +118,68 @@ export default {
 
       //1. 파일 확장자 알림 기능
       //파일명
-      let fileName = uploadSound['name'];
+      let fileName = uploadSound["name"];
       //파일의 확장자 추출
-      var fileDot = fileName.split('.').pop()
+      var fileDot = fileName.split(".").pop();
       //가능한 확장자
-      var dotArray = ["opus", "flac", "webm", "weba", "wav", "ogg", "m4a", "mp3", "oga", "mid", "amr", "aiff", "wma", "au", "aa"];
-      if(dotArray.includes(fileDot)==false){
-        alert(fileDot+' 파일은 업로드 하실 수 없습니다.');
-        this.$refs.soundFileInput.value = '';
+      var dotArray = [
+        "opus",
+        "flac",
+        "webm",
+        "weba",
+        "wav",
+        "ogg",
+        "m4a",
+        "mp3",
+        "oga",
+        "mid",
+        "amr",
+        "aiff",
+        "wma",
+        "au",
+        "aa",
+      ];
+      if (dotArray.includes(fileDot) == false) {
+        alert(fileDot + " 파일은 업로드 하실 수 없습니다.");
+        this.$refs.soundFileInput.value = "";
       }
     },
     //추출
     fileUpload() {
-      this.output = "",
-      this.show = "";
+      (this.output = ""), (this.show = "");
       var formData = new FormData();
       var soundFile = document.getElementById("soundFileInput");
-      if(soundFile.files[0]===undefined){
-        alert("파일을 첨부해주세요.")
-      }else{
+      if (soundFile.files[0] === undefined) {
+        alert("파일을 첨부해주세요.");
+      } else {
         this.extract = "waiting";
         formData.append("soundFile", soundFile.files[0]);
-      axios
-        .post("http://localhost:9090/stt/export", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        .then((response) => {
-          (this.export = response.data), (this.extract = "result");
-        });
+        axios
+          .post("http://localhost:9090/stt/export", formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then((response) => {
+            (this.export = response.data), (this.extract = "result");
+          });
       }
     },
     //입력체크
     check() {
       let err = true;
       let msg = "";
-      err && !this.export && (
-        (msg = "추출하기를 먼저 진행해주세요."),
-        (err = false)
-      );
-      if(!err) alert(msg);
-      else(this.show = "waiting"), this.send();
+      err &&
+        !this.export &&
+        ((msg = "추출하기를 먼저 진행해주세요."), (err = false));
+      if (!err) alert(msg);
+      else (this.show = "waiting"), this.send();
     },
     //요약
     send() {
       http
         .post("stt/sum", {
-          input: this.export
+          input: this.export,
         })
         .then((response) => {
           (this.show = "result"), (this.output = response.data);
@@ -169,13 +188,13 @@ export default {
     //새로고침
     reload() {
       (this.input = ""),
-      (this.output = ""),
-      (this.show = ""),
-      (this.export = ""),
-      (this.extract = "");
-      (this.$refs.soundFileInput.value = '');
-      (this.$refs.source.src = '');
-      (this.$refs.playWav.load());
+        (this.output = ""),
+        (this.show = ""),
+        (this.export = ""),
+        (this.extract = "");
+      this.$refs.soundFileInput.value = "";
+      this.$refs.source.src = "";
+      this.$refs.playWav.load();
     },
   },
 };
@@ -186,6 +205,9 @@ export default {
 .STTSummary {
   height: 70%;
   margin-top: 3%;
+}
+.typeInfo {
+  padding-bottom: 20px;
 }
 .soundFileInput {
   height: 45px;
