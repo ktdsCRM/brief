@@ -222,6 +222,7 @@ export default {
 }
 .typeInfo {
   padding-bottom: 20px;
+  font-size: 8pt;
 }
 .imageFileInput {
   height: 45px;
