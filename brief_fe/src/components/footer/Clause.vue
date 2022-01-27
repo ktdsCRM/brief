@@ -16,7 +16,7 @@ export default {};
   height: 80px;
   bottom: 0;
   width: 100%;
-  /* margin-top: 100px; */
+  /* margin-top: 60px; */
   opacity: 0.6;
 }
 </style>

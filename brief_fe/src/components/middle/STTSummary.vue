@@ -208,6 +208,7 @@ export default {
 }
 .typeInfo {
   padding-bottom: 20px;
+  font-size: 9pt;
 }
 .soundFileInput {
   height: 45px;
